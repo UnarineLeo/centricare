@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>CentriCare | Facilities Management & Cleaning Services South Africa</title>
+    <meta name="title" content="CentriCare | Facilities Management & Cleaning Services South Africa">
+    <meta name="description" content="CentriCare provides facilities management, hygiene services, waste management, uniforms, and supply solutions in South Africa.">
+    <meta name="robots" content="index, follow">
+    <link href="img/favicon.png" rel="icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="css/pages.css?v=2" rel="stylesheet">
+    <style>
+        .hero-note {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .section-link-inline {
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .service-tag {
+            font-size: 0.8rem;
+        }
+
+        .header-services {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            width: min(100%, 560px);
+        }
+
+        .header-services .cc-services-item {
+            width: 100%;
+        }
+
+        .header-services .cc-circle-container-sm {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 8px;
+        }
+
+        .header-services .cc-circle-container-sm .cc-circle-main,
+        .header-services .cc-circle-container-sm .cc-left-half-img,
+        .header-services .cc-circle-container-sm .cc-top-right-img,
+        .header-services .cc-circle-container-sm .cc-bottom-right-colored {
+            width: 100%;
+            height: 100%;
+        }
+
+        .header-service-link {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .header-service-link:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .header-service-link strong {
+            font-size: 0.95rem;
+            line-height: 1.2;
+        }
+
+        .header-service-link span {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.35;
+        }
+
+        .header-service-link--wide {
+            grid-column: 1 / -1;
+        }
+
+        .header-services .service-tag {
+            color: rgba(255, 255, 255, 0.88);
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .header-services__footer {
+            grid-column: 1 / -1;
+        }
+
+        .button-group {
+            display: none;
+        }
+
+        .custom-btn {
+            display: block;
+            padding: 16px 20px;
+            font-size: 1.05rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .outline-btn {
+            border: 2px solid #fff;
+            color: #fff;
+            background: transparent;
+        }
+
+        .outline-btn:hover {
+            background-color: #fff;
+            color: #0b1f3a;
+        }
+
+        .filled-btn {
+            background-color: #1abc9c;
+            color: #fff;
+            border: 2px solid #1abc9c;
+        }
+
+        .filled-btn:hover {
+            background-color: #159a80;
+            border-color: #159a80;
+            color: #fff;
+        }
+
+        #header {
+            min-height: 58vh;
+        }
+
+        #header .row {
+            min-height: 58vh;
+        }
+
+        .header-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.08;
+        }
+
+        @media (max-width: 768px) {
+            .header-services {
+                width: 100%;
+                grid-template-columns: 1fr;
+            }
+
+            .header-services .cc-circle-container-sm {
+                width: 112px;
+                height: 112px;
+            }
+
+            #header,
+            #header .row {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="cc-storefront">
+    <nav class="cc-nav">
+        <a href="index.html" class="cc-nav__brand">
+            <img src="./img/CentriCare-logo.png" alt="CentriCare Logo" class="cc-nav__logo">
+        </a>
+        <button class="cc-nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="cc-nav__menu" id="navMenu">
+            <a href="index.html" class="cc-nav__link active">Home</a>
+            <a href="services.html" class="cc-nav__link">Services</a>
+            <a href="industries.html" class="cc-nav__link">Industries</a>
+            <a href="clients.html" class="cc-nav__link">Clients</a>
+            <a href="about.html" class="cc-nav__link">About Us</a>
+            <a href="contact.html" class="cc-nav__cta">Contact Us</a>
+        </div>
+    </nav>
+
+    <section id="header" class="container-fluid overflow-hidden p-0 bg-navy">
+        <div class="container-fluid p-0">
+            <div class="row align-items-center g-0 px-4 px-md-5 py-5 py-md-0">
+                <div class="col-md-4 ps-md-3 text-white">
+                    <div class="header-title-container">
+                        <h1 class="header-title">
+                            Reliable <span class="text-teal fw-bold">service</span><br>
+                            across <span class="text-teal fw-bold">every</span> space.
+                        </h1>
+                        <p class="small hero-note mb-0">From hygiene and facilities management to infrastructure and supply services, we help organizations run efficiently.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-8 d-flex justify-content-center align-items-center pt-4 pt-md-0">
+                    <div class="header-services">
+
+                        <div class="cc-services-item">
+                            <a href="services.html#cleaning-services" class="cc-service-link text-decoration-none">
+                            <div class="cc-circle-container-sm border-2px-white">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img24.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img25.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-orange">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">01</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Cleaning</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#hygiene-services" class="cc-service-link text-decoration-none">
+                            <div class="cc-circle-container-sm">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img27.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img28.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-yellow">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">02</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Hygiene</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#hygiene-equipment" class="cc-service-link text-decoration-none">
+                            <div class="cc-circle-container-sm">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img31.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img32.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-lime">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">03</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Hygiene equipment</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#pest-control" class="cc-service-link text-decoration-none">
+                            <div class="cc-circle-container-sm">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img34.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img35.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-red">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">04</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Pest control</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#window-cleaning" class="cc-service-link text-decoration-none">
+                            <div class="cc-circle-container-sm">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img37.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img38.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-purple">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">05</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Window care</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#waste-management" class="cc-servie-link text-decoration-none">
+                            <div class="cc-circle-container-sm">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img40.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img41.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-green">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">06</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Waste management</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#furniture-supply" class="cc-service-link text-decoration-none">
+                            <div class="cc-circle-container-sm">
+                                <div class="cc-circle-main">
+                                    <div class="cc-left-half-img" style="background-image:url('img/services/img84.jpg');"></div>
+                                    <div class="cc-top-right-img" style="background-image:url('img/services/img85.jpg');"></div>
+                                    <div class="cc-bottom-right-colored bg-pink">
+                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">07</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="my-2 service-tag">Furniture supply</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="uniform.html" class="cc-service-link text-decoration-none">
+                                <div class="cc-circle-container-sm">
+                                    <div class="cc-circle-main">
+                                        <div class="cc-left-half-img" style="background-image:url('img/services/img86.jpg');"></div>
+                                        <div class="cc-top-right-img" style="background-image:url('img/services/img87.jpg');"></div>
+                                        <div class="cc-bottom-right-colored bg-light-purple">
+                                            <p class="text-white m-0" style="font-size:11px;line-height:1.3;">08</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="my-2 service-tag">Uniforms</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#construction" class="cc-service-link text-decoration-none">
+                                <div class="cc-circle-container-sm">
+                                    <div class="cc-circle-main">
+                                        <div class="cc-left-half-img" style="background-image:url('img/industries/img49.jpg');"></div>
+                                        <div class="cc-top-right-img" style="background-image:url('img/services/construction.jpg');"></div>
+                                        <div class="cc-bottom-right-colored bg-teal">
+                                            <p class="text-white m-0" style="font-size:11px;line-height:1.3;">09</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="my-2 service-tag">Construction</p>
+                            </a>
+                        </div>
+
+                        <div class="cc-services-item">
+                            <a href="services.html#accommodation" class="cc-service-link text-decoration-none">
+                                <div class="cc-circle-container-sm">
+                                    <div class="cc-circle-main">
+                                        <div class="cc-left-half-img" style="background-image:url('img/services/accomodation_1.jpg');"></div>
+                                        <div class="cc-top-right-img" style="background-image:url('img/services/student_accommodation_2.jpg');"></div>
+                                        <div class="cc-bottom-right-colored bg-light-green">
+                                            <p class="text-white m-0" style="font-size:11px;line-height:1.3;">10</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="my-2 service-tag">Student Accommodation</p>
+                            </a>
+                        </div>
+
+                        <div class="header-services__footer">
+                            <a class="fw-bold text-teal text-decoration-none" href="services.html">See all services <i class="fas fa-arrow-right"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="overflow-hidden">
+
+    <section id="about" class="overflow-hidden">
+        <div class="container-fluid p-0">
+            <div class="row g-0 align-items-stretch">
+                <div class="col-md-5 d-none d-lg-block position-relative">
+                    <img class="cc-wall-image" src="img/banners/img96.jpg" alt="CentriCare cleaning products">
+                    <div class="letter-c-left"></div>
+                </div>
+                <div class="col-md-5 py-6 px-4 px-md-5">
+                    <div class="cc-header-2 bg-navy" style="margin-top: 10px;">About us</div>
+                    <p class="mb-3"><span class="text-teal fw-bold">CentriCare PTY Ltd</span>  is a trailblazing, <span class="text-teal fw-bold">100% black woman-owned</span> enterprise with a proven track record spanning over <span class="text-teal fw-bold">16 years</span>.</p>
+                    <p class="mb-3">Established in <span class="text-teal fw-bold">2009</span>, we have proudly emerged as a preferred service provider in healthcare supplies, infrastructure development, 
+                        and facilities management for both the public and private sectors in South Africa.
+                    </p>
+                    <p class="mb-3">At <span class="text-teal fw-bold">CentriCare PTY Ltd</span> , excellence is not just a goal; it is our standard. Our operational processes are rooted in internationally 
+                        recognized <span class="text-teal fw-bold">ISO 9001:2015 Quality Management Systems</span>, ensuring consistency, innovation, and superior outcomes across all our services.
+                    </p>
+
+                    <p class="mb-3">Our comprehensive service offerings include cleaning services, hygiene services, pest control, and waste
+                        management-ensuring every aspect of your facility operates at its best.
+                    </p>
+                    <a class="fw-bold text-teal text-decoration-none" href="about.html#about_about" style="margin-bottom: 20px;">Read more about us <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="overflow-hidden text-white">
+        <div class="container-fluid p-0 bg-navy">
+            <div class="row g-0 align-items-stretch">
+                <div class="col-md-4 p-4 p-md-5">
+                    <div class="cc-header-2 bg-teal">Vision</div>
+                    <p class="text-white small">To be a beacon of excellence and innovation in healthcare supplies, infrastructure development, clothing, textile, footwear and facilities 
+                        management, redefining industry standards and empowering communities while building a sustainable future.
+                    </p>
+                    <div class="cc-header-2 bg-teal mt-3">Mission</div>
+                    <p class="text-white small">To deliver exceptional services that prioritize quality, innovation, and customer satisfaction.
+                        By embracing cutting-edge practices and fostering meaningful partnerships, we strive to create clean, safe, and efficient environments that 
+                        positively impact lives and drive progress in the public and private sectors.
+                    </p>
+                    <a class="fw-bold text-teal text-decoration-none" href="about.html#mission_about">See the full mission <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="col-md-4 p-4 p-md-5">
+                    <div class="cc-header-2 bg-teal">Values</div>
+                    <p class="text-white small mb-0">We have 5 core values that guide our actions and decisions.</p>
+                    <ul class="page-split__list">
+                        <li><span class="text-teal fw-bold">Excellence</span> in every service touchpoint</li>
+                        <li><span class="text-teal fw-bold">Integrity</span> in every relationship</li>
+                        <li><span class="text-teal fw-bold">Innovation</span> that improves outcomes</li>
+                        <li><span class="text-teal fw-bold">Sustainability</span> in daily practice</li>
+                        <li><span class="text-teal fw-bold">Community impact</span> that lasts</li>
+                    </ul>
+                    <a class="fw-bold text-teal text-decoration-none section-link-inline" href="about.html#values_about">Explore values <i class="fas fa-arrow-right"></i></a>
+                    <div class="cc-quote-card">
+                        <span class="cc-quote-mark">&rdquo;</span>
+                        <p class="cc-quote-text">To be a beacon of <strong>excellence</strong> and <strong>innovation</strong></p>
+                    </div>
+                </div>
+                <div class="col-md-4 p-0 d-none d-lg-block position-relative">
+                    <img class="cc-wall-image" src="img/banners/img98.jpg" alt="CentriCare window cleaning">
+                    <div class="letter-c-right"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="overflow-hidden">
+        <div class="container-fluid p-0">
+            <div class="row g-0 align-items-stretch">
+                <div class="col-md-5 d-none d-lg-block position-relative">
+                    <img class="cc-wall-image" src="img/banners/img100.jpg" alt="CentriCare cleaning products">
+                    <div class="letter-c-left"></div>
+                </div>
+                <div class="col-md-7 p-4 p-md-5">
+                    <div class="cc-header-2 bg-teal">Expertise</div>
+                    <p> At <span class="text-teal fw-bold">CentriCare PTY Ltd</span> , we are dedicated to delivering excellence in every aspect of hygiene, cleaning, and facility care. 
+                        Our comprehensive range of services is tailored to meet the diverse needs of our clients, ensuring clean, safe, and 
+                        well-maintaned environments across various sectors.
+                    </p>
+                    <br>
+                    <div class="cc-header-2 bg-navy">Approach</div>
+                    <p> Our approach is built on delivering excellence through innovation, collaboration, and attention to
+                        detail. We implement internationally recognized quality management systems, including ISO 9001:2015, to ensure
+                        consistent and reliable service delivery across all sectors.
+                    </p>
+                    <!-- <p>Then we keep the service clear, trained, and easy to manage.</p> -->
+                    <a class="fw-bold text-teal text-decoration-none" href="expertise.html">View our expertise & approach<i class="fas fa-arrow-right"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="industries" class="overflow-hidden text-white">
+        <div class="container-fluid p-0 bg-navy">
+            <div class="row position-relative">
+                <div class="col-md-2 p-0">
+                    <div class="cc-top-left-shape">
+                        <p class="text-white fw-bold">Industries</p>
+                    </div>
+                </div>
+            </div>
+            <div class="home-industries p-4 p-md-5">
+                <h2 class="cc-header-2 bg-navy text-center w-100">_</h2>
+
+                <div class="home-industries__grid">
+                    <div class="home-industries__item">
+                        <div class="cc-shape-item">
+                            <div class="cc-shape-visual">
+                                <div class="cc-partial-ring"></div>
+                                <div class="cc-partial-photo" style="background-image:url('img/industries/img43.jpg');"></div>
+                            </div>
+                            <div class="cc-shape-text">
+                                <h2 class="industry-header">Hospitality and Tourism</h2>
+                                <p>Ensuring hotels, resorts, and event venues maintain impeccable hygiene and comfort to provide exceptional guest experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-industries__item">
+                        <div class="cc-shape-item">
+                            <div class="cc-shape-visual">
+                                <div class="cc-partial-ring"></div>
+                                <div class="cc-partial-photo" style="background-image:url('img/industries/img45.jpg');"></div>
+                            </div>
+                            <div class="cc-shape-text">
+                                <h2>Healthcare Facilities</h2>
+                                <p>Supporting hospitals, clinics, and medical centres with specialized waste management, intensive cleaning, and sanitation to meet health and safety standards.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-industries__item">
+                        <div class="cc-shape-item">
+                            <div class="cc-shape-visual">
+                                <div class="cc-partial-ring"></div>
+                                <div class="cc-partial-photo" style="background-image:url('img/industries/img46.jpg');"></div>
+                            </div>
+                            <div class="cc-shape-text">
+                                <h2>Retail and Commercial Spaces</h2>
+                                <p>Enhancing the appeal of malls, retail outlets, and offices with deep cleaning, waste collection, and window care solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-industries__item">
+                        <div class="cc-shape-item">
+                            <div class="cc-shape-visual">
+                                <div class="cc-partial-ring"></div>
+                                <div class="cc-partial-photo" style="background-image:url('img/industries/img44.jpg');"></div>
+                            </div>
+                            <div class="cc-shape-text">
+                                <h2>Education institutions</h2>
+                                <p>Creating safe and hygienic learning environments in schools, universities, and training centres through regular cleaning and hygiene services.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-industries__item">
+                        <div class="cc-shape-item">
+                            <div class="cc-shape-visual">
+                                <div class="cc-partial-ring"></div>
+                                <div class="cc-partial-photo" style="background-image:url('img/industries/img50.jpg');"></div>
+                            </div>
+                            <div class="cc-shape-text">
+                                <h2>Government and Municipal Facilities</h2>
+                                <p>Supporting public facilities with tailored cleaning, hygiene, and waste management services for community use, delivered with care, precision, and lasting impact.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-industries__item">
+                        <div class="cc-shape-item">
+                            <div class="cc-shape-visual">
+                                <div class="cc-partial-ring"></div>
+                                <div class="cc-partial-photo" style="background-image:url('img/industries/img49.jpg');"></div>
+                            </div>
+                            <div class="cc-shape-text">
+                                <h2>Real Estate and Construction</h2>
+                                <p>Preparing construction sites and newly completed buildings for occupancy with post-construction cleaning and waste removal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="fw-bold text-teal text-decoration-none section-link-inline" href="industries.html">Explore all industries <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients" class="overflow-hidden">
+        <div class="container-fluid p-0">
+            <div class="page-split page-split--clients page-split--full">
+                <div class="page-split__media">
+                    <div class="row position-relative">
+                        <div class="col-md-2 p-0">
+                            <div class="cc-top-left-shape">
+                                <p class="text-white fw-bold">Clients</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>__</p>
+                    <div class="client-logo-grid">
+                        <img class="client-logo-tile" src="./img/clients/img55.jpg" alt="Fourways Mall Logo">
+                        <img class="client-logo-tile" src="./img/clients/img56.jpg" alt="Future Space Logo">
+                        <img class="client-logo-tile" src="./img/clients/img57.jpg" alt="Safety Critical Solutions Logo">
+                        <img class="client-logo-tile" src="./img/clients/img58.jpg" alt="Tibs Logo">
+                        <img class="client-logo-tile" src="./img/clients/img59.jpg" alt="RSG Engineering Logo">
+                        <img class="client-logo-tile" src="./img/clients/img60.jpg" alt="Dirt Diggers Logo">
+                        <img class="client-logo-tile" src="./img/clients/smu.jpg" alt="SMU Logo">
+                        <img class="client-logo-tile" src="./img/clients/verb.jpg" alt="Verb Logo">
+                    </div>
+                </div>
+                <div class="home-industries p-4 p-md-5">
+                        <a class="fw-bold text-teal text-decoration-none section-link-inline" href="clients.html">View our clients <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="logo-container">
+                        <img src="./img/CentriCare-logo-inverse.png" alt="CentriCare Logo White" width="100%">
+                    </div>
+                </div>
+
+                <div class="col-md-1 d-none d-md-block">
+                    <div class="v-line"></div>
+                </div>
+
+                <div class="col-md-5 ps-md-5">
+                    <h6 class="contact-header">Contact</h6>
+                    <p class="contact-detail">We look forward to partnering with you to deliver exceptional facilities management 
+                        solutions. Get in touch with us today!
+                    </p>
+                    <p class="contact-detail"><span class="text-teal">Address:</span></p>
+                    <p class="contact-detail">2 Bruton Road</p>
+                    <p class="contact-detail">Bryanston, Gauteng</p>
+                    <p class="contact-detail">South Africa, 2191</p>
+
+                    <p class="contact-detail"><span class="text-teal">Phone & Mobile</span></p>
+                    <p class="contact-detail"><span class="text-teal">Tel:</span> (+27) 071 472 7120</p>
+                    <p class="contact-detail"><span class="text-teal">Phone:</span> (+27) 011 300 0800</p>
+
+                    <p class="contact-detail"><span class="text-teal">Online</span></p>
+                        <p class="contact-detail"><span class="text-teal">Email:</span> 
+                    <a href="mailto:tebogo@centricare.co.za" class="text-white text-decoration-none">tebogo@centricare.co.za</a>
+                    <p class="contact-detail"><span class="text-teal">Website:</span> 
+                        <a href="https://www.centricare.co.za" class="text-white text-decoration-none" target="_blank">www.centricare.co.za</a>
+                    </p>
+
+                    <a class="fw-bold text-teal text-decoration-none" href="contact.html">Open the contact page <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="#header" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navMenu.classList.toggle('is-open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('is-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

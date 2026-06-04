@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Uniform Distribution Showcase</title>
+
+    <meta name="title" content="Centricare | Facilities Management & Cleaning Services South Africa">
+    <meta name="description" content="Centricare is a 100% black woman-owned leader in facilities management, hygiene services, and healthcare supplies in South Africa. 16+ years of excellence in cleaning, waste management, and office furniture.">
+    <meta name="keywords" content="facilities management south africa, professional cleaning services gauteng, hygiene services johannesburg, black woman owned business, waste management services, pest control south africa, hospital furniture suppliers, uniform distribution">
+    
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link href="img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link href="css/uniform.css?v=2" rel="stylesheet"> 
+</head>
+<body class="cc-storefront cc-catalog-page">
+
+	<!-- Navbar Start -->
+	<nav class="cc-nav">
+        <a href="index.html" class="cc-nav__brand">
+            <img src="./img/CentriCare-logo.png" alt="CentriCare Logo" class="cc-nav__logo">
+        </a>
+        <button class="cc-nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="cc-nav__menu" id="navMenu">
+            <a href="index.html" class="cc-nav__link">Home</a>
+            <a href="services.html" class="cc-nav__link">Services</a>
+            <a href="industries.html" class="cc-nav__link">Industries</a>
+            <a href="clients.html" class="cc-nav__link active">Clients</a>
+            <a href="about.html" class="cc-nav__link">About Us</a>
+            <a href="contact.html" class="cc-nav__cta">Contact Us</a>
+        </div>
+    </nav>
+	<!-- Navbar End -->
+
+	<main class="page">
+		<section class="hero">
+			<div class="hero-card">
+				<span class="eyebrow"><span class="dot"></span> Sellable product catalog</span>
+				<h1>Uniforms, ready to browse.</h1>
+				<p class="lede">
+					This page showcases our sellable products, feel free to explore the catalog and inspect the product details. 
+				</p>
+			</div>
+			<aside class="side-card">
+				<div>
+					<span class="eyebrow"><span class="dot"></span> Live catalog</span>
+					<h2>Search, filter, and add items to the cart without leaving the page.</h2>
+				</div>
+				<div class="api-block">
+					<span class="api-label">Quick tips</span>
+					<ul class="hint-list">
+						<li>Use the search field to narrow product names</li>
+						<li>Open the cart when you are ready to submit</li>
+					</ul>
+				</div>
+			</aside>
+		</section>
+
+		<section class="toolbar" aria-label="Catalog controls">
+			<label class="field">
+			<span>Product name</span>
+			<input id="searchInput" type="search" placeholder="Search by product name...">
+		</label>
+		<label class="field">
+			<span>Filter by category</span>
+			<select id="categoryFilter">
+				<option value="">All categories</option>
+			</select>
+		</label>
+		<div class="button-row">
+			<a class="secondary action-link" style="background-color: var(--navy); color: #fff;"  id="viewCartButton" href="cart.html">View cart</a>
+			<button class="secondary" style="background-color: var(--teal); color: #fff;" id="resetButton" type="button">Reset</button>
+			<button class="primary" id="refreshButton" type="button">Refresh catalog</button>
+		</div>
+	</section>
+
+	<div class="status-row">
+		<div class="pill" id="statusPill"><strong id="statusLabel">Ready</strong></div>
+		<!-- <div class="pill">Fetched from the live API endpoint</div>
+		<div class="pill" id="resultHint">No items loaded yet</div> -->
+	</div>
+
+	<a href="cart.html" class="floating-cart-button" aria-label="Open cart and checkout" title="Open cart and checkout">
+		Cart
+	</a>
+
+	<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+	<section class="grid-shell">
+		<div class="grid" id="catalogGrid"></div>
+	</section>
+
+	<section class="empty-state" id="emptyState">
+		<strong>No products to show.</strong>
+		<span id="emptyText">Try refreshing the catalog or changing the search term.</span>
+	</section>
+
+</main>
+
+	
+
+	<script>
+		const endpoint = '/proxy.php?action=sellable';
+		const catalogGrid = document.getElementById('catalogGrid');
+		const emptyState = document.getElementById('emptyState');
+		const emptyText = document.getElementById('emptyText');
+		const statusLabel = document.getElementById('statusLabel');
+		const statusPill = document.getElementById('statusPill');
+		const resultHint = document.getElementById('resultHint') || { textContent: '' };
+		const toastNode = document.getElementById('toast');
+		const searchInput = document.getElementById('searchInput');
+		const categoryFilter = document.getElementById('categoryFilter');
+		const refreshButton = document.getElementById('refreshButton');
+		const resetButton = document.getElementById('resetButton');
+		const defaultAccessKey = '91425af8-0b2f-451c-83e6-e8657541ed1a';
+
+		let allItems = [];
+		let allCategories = new Set();
+		let currentError = '';
+		const mediaCache = new Map();
+		const mediaObserver = 'IntersectionObserver' in window
+			? new IntersectionObserver(entries => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) {
+						continue;
+					}
+
+					mediaObserver.unobserve(entry.target);
+					const productId = entry.target.dataset.productId;
+					const itemRef = entry.target.__itemRef;
+					if (productId) {
+						loadMediaForCard(entry.target, productId, itemRef);
+					}
+				}
+			}, { rootMargin: '240px 0px' })
+			: null;
+
+		function setStatus(message, tone = 'idle') {
+			statusLabel.textContent = message;
+			statusPill.dataset.tone = tone;
+		}
+
+		function setEmpty(message, visible = false) {
+			emptyText.textContent = message;
+			emptyState.classList.toggle('is-visible', visible);
+		}
+
+		function getImage(item) {
+			return item?.image || item?.imageUrl || item?.imageURL || item?.thumbnail || item?.thumbnailUrl || item?.picture || item?.photo || item?.img || '';
+		}
+
+		function getProductId(item) {
+			return item?.productId ?? item?.id ?? item?.productID ?? '';
+		}
+
+		function getPartId(item) {
+			return item?.partId ?? item?.partID ?? item?.part ?? item?.sku ?? '';
+		}
+
+		function getTitle(item) {
+			return item?.productName || item?.name || item?.title || item?.displayName || item?.sku || item?.code || 'Untitled item';
+		}
+
+		function getDescription(item) {
+			return item?.description || '';
+		}
+
+		function getFabric(item) {
+			return item?.fabric || '';
+		}
+
+		function getCategories(item) {
+			const cats = item?.productCategory;
+			if (Array.isArray(cats)) {
+				return cats.map(c => c?.category || '').filter(Boolean);
+			}
+			return [];
+		}
+
+		function getProductPictures(item) {
+			const pics = item?.productPicture;
+			if (Array.isArray(pics)) {
+				return pics.filter(p => String(p?.mediaType || '').toLowerCase() === 'image' && p?.url).sort((a, b) => (a?.displayOrder || 0) - (b?.displayOrder || 0));
+			}
+			return [];
+		}
+
+		function getFirstPictureUrl(item) {
+			const pics = getProductPictures(item);
+			return pics.length > 0 ? pics[0].url : '';
+		}
+
+
+
+		function normalizeItems(payload) {
+			if (Array.isArray(payload)) {
+				return payload;
+			}
+
+			if (!payload || typeof payload !== 'object') {
+				return [];
+			}
+
+			const wrapperKeys = ['productSellables', 'items', 'data', 'products', 'results', 'value', 'sellableProducts'];
+			for (const key of wrapperKeys) {
+				if (Array.isArray(payload[key])) {
+					return payload[key];
+				}
+			}
+
+			if (Array.isArray(payload.product)) {
+				return payload.product;
+			}
+
+			return [];
+		}
+
+		function getProductDetailEndpoint(productId) {
+			return `/proxy.php?action=getbyid&id=${encodeURIComponent(productId)}`;
+		}
+
+		async function fetchProductDetail(productId) {
+			if (mediaCache.has(productId)) {
+				return mediaCache.get(productId);
+			}
+
+			const request = fetch(getProductDetailEndpoint(productId), {
+				method: 'GET',
+				headers: {
+					accesskey: defaultAccessKey
+				}
+			})
+				.then(async response => {
+					const payload = await response.json();
+					if (!response.ok) {
+						throw new Error(payload?.message || payload?.error || `Product detail request failed with status ${response.status}`);
+					}
+					return payload;
+				})
+				.catch(() => ({}));
+
+			mediaCache.set(productId, request);
+			return request;
+		}
+
+		async function loadMediaForCard(mediaNode, productId, cardItem) {
+			if (!mediaNode || mediaNode.dataset.mediaLoaded === 'true') {
+				return;
+			}
+
+			mediaNode.dataset.mediaLoaded = 'true';
+			const productDetail = await fetchProductDetail(productId);
+			const imageUrl = getFirstPictureUrl(productDetail);
+			if (!imageUrl) {
+				mediaNode.dataset.mediaState = 'missing';
+				return;
+			}
+
+			const title = getTitle(productDetail);
+			mediaNode.innerHTML = '';
+			const image = document.createElement('img');
+			image.loading = 'lazy';
+			image.alt = title;
+			image.src = imageUrl;
+			image.onerror = () => {
+				mediaNode.dataset.mediaState = 'missing';
+				mediaNode.innerHTML = `<div class="fallback">${escapeHtml(title)}</div>`;
+			};
+			mediaNode.appendChild(image);
+			mediaNode.dataset.mediaState = 'loaded';
+			if (cardItem) {
+				Object.assign(cardItem, productDetail);
+				getCategories(productDetail).forEach(cat => allCategories.add(cat));
+				updateCategoryFilter();
+				const card = mediaNode.closest('article');
+				if (card) {
+					const titleNode = card.querySelector('h3');
+					if (titleNode) titleNode.textContent = title;
+					const metaNode = card.querySelector('.meta');
+					if (metaNode) {
+						metaNode.innerHTML = '';
+						const labels = getCategories(productDetail);
+						if (!labels.length && productDetail?.sku) {
+							labels.push(productDetail.sku);
+						}
+						labels.forEach(label => {
+							const tag = document.createElement('span');
+							tag.className = 'tag';
+							tag.textContent = String(label);
+							metaNode.appendChild(tag);
+						});
+					}
+					const detailsNode = card.querySelector('.details');
+					if (detailsNode) {
+						detailsNode.innerHTML = '';
+						const detailLines = buildDetailLines(productDetail);
+						if (detailLines.length) {
+							detailLines.forEach(({ label, value }) => {
+								const line = document.createElement('div');
+								line.innerHTML = `<strong>${escapeHtml(label)}:</strong> <code>${escapeHtml(stringifyField(value))}</code>`;
+								detailsNode.appendChild(line);
+							});
+						}
+					}
+				}
+			}
+		}
+
+		function stringifyField(value) {
+			if (value == null || value === '') {
+				return '—';
+			}
+
+			if (Array.isArray(value)) {
+				return value.filter(Boolean).map(item => typeof item === 'object' ? JSON.stringify(item) : String(item)).join(', ');
+			}
+
+			if (typeof value === 'object') {
+				try {
+					return JSON.stringify(value);
+				} catch {
+					return '[object]';
+				}
+			}
+
+			return String(value);
+		}
+
+		function buildDetailLines(item) {
+			const lines = [];
+			const sku = item?.sku || item?.partId || '';
+			if (sku) {
+				lines.push({ label: 'SKU', value: sku });
+			}
+			const fabric = getFabric(item);
+			if (fabric) {
+				lines.push({ label: 'Fabric', value: fabric });
+			}
+			return lines;
+		}
+
+		function render(items) {
+			const query = searchInput.value.trim().toLowerCase();
+			const selectedCategory = categoryFilter.value.trim();
+			const visibleItems = items.filter(item => {
+				const nameMatch = !query || getTitle(item).toLowerCase().includes(query);
+				const categories = getCategories(item);
+				const categoryMatch = !selectedCategory || categories.includes(selectedCategory);
+				return nameMatch && categoryMatch;
+			});
+
+			catalogGrid.innerHTML = '';
+			resultHint.textContent = `${items.length} item${items.length === 1 ? '' : 's'} loaded`;
+
+			if (!visibleItems.length) {
+				const filterActive = query || selectedCategory;
+				const message = filterActive ? 'No products match your filters.' : currentError || 'The API returned no products.';
+				setEmpty(message, true);
+				resultHint.textContent = filterActive ? 'No matching products' : 'Empty catalog';
+				return;
+			}
+
+			setEmpty('', false);
+			resultHint.textContent = `${visibleItems.length} product${visibleItems.length === 1 ? '' : 's'} on screen`;
+
+			const fragment = document.createDocumentFragment();
+
+			visibleItems.forEach((item, index) => {
+				const card = document.createElement('article');
+				card.className = 'card';
+
+				const media = document.createElement('div');
+				media.className = 'card-media';
+				media.dataset.productId = String(getProductId(item));
+				media.dataset.productTitle = getTitle(item);
+				media.dataset.mediaState = 'loading';
+				media.innerHTML = `<div class="fallback">Loading image for ${escapeHtml(getTitle(item))}</div>`;
+
+				const imageUrl = getFirstPictureUrl(item);
+				if (imageUrl) {
+					const image = document.createElement('img');
+					image.loading = 'lazy';
+					image.alt = getTitle(item);
+					image.src = imageUrl;
+					image.onerror = () => {
+						media.innerHTML = `<div class="fallback">${escapeHtml(getTitle(item))}</div>`;
+					};
+					media.appendChild(image);
+					media.dataset.mediaState = 'loaded';
+				} else {
+					const productId = getProductId(item);
+					if (productId !== '' && mediaObserver) {
+						media.__itemRef = item;
+						mediaObserver.observe(media);
+					} else if (productId !== '') {
+						loadMediaForCard(media, productId, item);
+					} else {
+						media.dataset.mediaState = 'missing';
+						media.innerHTML = `<div class="fallback">${escapeHtml(getTitle(item))}</div>`;
+					}
+				}
+
+				const title = document.createElement('h3');
+				title.textContent = getTitle(item);
+
+				const meta = document.createElement('div');
+				meta.className = 'meta';
+				const labels = getCategories(item);
+				if (!labels.length && item?.sku) {
+					labels.push(item.sku);
+				}
+				labels.forEach(label => {
+					const tag = document.createElement('span');
+					tag.className = 'tag';
+					tag.textContent = String(label);
+					meta.appendChild(tag);
+				});
+
+				const details = document.createElement('div');
+				details.className = 'details';
+				const detailLines = buildDetailLines(item);
+				if (detailLines.length) {
+					detailLines.forEach(({ label, value }) => {
+						const line = document.createElement('div');
+						line.innerHTML = `<strong>${escapeHtml(label)}:</strong> <code>${escapeHtml(stringifyField(value))}</code>`;
+						details.appendChild(line);
+					});
+				} else {
+					const line = document.createElement('div');
+					line.textContent = `${stringifyField(getProductId(item))} · ${stringifyField(getPartId(item))}`;
+					details.appendChild(line);
+				}
+
+				const cartRow = document.createElement('div');
+				cartRow.className = 'card-cart-row';
+				const qtyLabel = document.createElement('label');
+				qtyLabel.className = 'qty-field';
+				qtyLabel.innerHTML = '<span>Qty</span>';
+				const qtyInput = document.createElement('input');
+				qtyInput.type = 'number';
+				qtyInput.min = '1';
+				qtyInput.step = '1';
+				qtyInput.value = '1';
+				qtyInput.inputMode = 'numeric';
+				qtyInput.className = 'qty-input';
+				qtyLabel.appendChild(qtyInput);
+				const addBtn = document.createElement('button');
+				addBtn.type = 'button';
+				addBtn.className = 'primary';
+				addBtn.style.backgroundColor = 'var(--teal)';
+				addBtn.textContent = 'Add to cart';
+				addBtn.addEventListener('click', () => addToCart(item, qtyInput.value));
+				cartRow.append(qtyLabel, addBtn);
+
+				card.append(media, title, meta, details);
+				card.appendChild(cartRow);
+				fragment.appendChild(card);
+			});
+
+			catalogGrid.appendChild(fragment);
+		}
+
+		function escapeHtml(value) {
+			return String(value)
+				.replaceAll('&', '&amp;')
+				.replaceAll('<', '&lt;')
+				.replaceAll('>', '&gt;')
+				.replaceAll('"', '&quot;')
+				.replaceAll("'", '&#39;');
+		}
+
+		async function loadCatalog() {
+			setStatus('Loading...', 'idle');
+			currentError = '';
+			catalogGrid.innerHTML = '';
+			setEmpty('Loading products...', true);
+			resultHint.textContent = 'Request in progress';
+
+			try {
+				const response = await fetch(endpoint, {
+					method: 'GET',
+					headers: {
+						accesskey: defaultAccessKey
+					}
+				});
+
+				const contentType = response.headers.get('content-type') || '';
+				const payload = contentType.includes('application/json') ? await response.json() : await response.text();
+
+				if (!response.ok) {
+					const message = typeof payload === 'string'
+						? payload
+						: payload?.message || payload?.error || `Request failed with status ${response.status}`;
+					throw new Error(message);
+				}
+
+				const items = normalizeItems(payload);
+				allItems = items;
+				
+				allCategories.clear();
+				items.forEach(item => {
+					getCategories(item).forEach(cat => allCategories.add(cat));
+				});
+				
+				updateCategoryFilter();
+				setStatus('Loaded', 'success');
+			resultHint.textContent = `${items.length} item${items.length === 1 ? '' : 's'} loaded`;
+				render(allItems);
+			} catch (error) {
+				allItems = [];
+				currentError = error?.message || 'Unable to load products.';
+				setStatus('Error', 'error');
+				resultHint.textContent = currentError;
+				setEmpty(currentError, true);
+				catalogGrid.innerHTML = '';
+			}
+		}
+
+		refreshButton.addEventListener('click', loadCatalog);
+		function updateCategoryFilter() {
+			const currentValue = categoryFilter.value;
+			categoryFilter.innerHTML = '<option value="">All categories</option>';
+			[...allCategories].sort().forEach(cat => {
+				const option = document.createElement('option');
+				option.value = cat;
+				option.textContent = cat;
+				categoryFilter.appendChild(option);
+			});
+			categoryFilter.value = currentValue;
+		}
+
+		resetButton.addEventListener('click', () => {
+			searchInput.value = '';
+			categoryFilter.value = '';
+			render(allItems);
+			setStatus(allItems.length ? 'Loaded' : 'Ready', allItems.length ? 'success' : 'idle');
+		});
+		searchInput.addEventListener('input', () => render(allItems));
+		categoryFilter.addEventListener('change', () => render(allItems));
+
+	let cart = [];
+
+	function saveCart() {
+		try { localStorage.setItem('catalog_cart', JSON.stringify(cart)); } catch { }
+	}
+
+	function loadCart() {
+		try {
+			const raw = localStorage.getItem('catalog_cart');
+			if (raw) cart = JSON.parse(raw) || [];
+		} catch { cart = []; }
+	}
+
+	function showToast(message) {
+		if (!toastNode) return;
+		toastNode.textContent = message;
+		toastNode.classList.add('is-visible');
+		window.clearTimeout(showToast._timer);
+		showToast._timer = window.setTimeout(() => toastNode.classList.remove('is-visible'), 2200);
+	}
+
+	function addToCart(item, quantityValue) {
+		const quantity = Math.max(1, parseInt(quantityValue, 10) || 1);
+		const id = getProductId(item) || getPartId(item) || getTitle(item);
+		const title = getTitle(item);
+		const sku = item?.sku || getPartId(item) || '';
+		const existing = cart.find(c => String(c.productId) === String(id));
+		if (existing) {
+			existing.qty = (existing.qty || 1) + quantity;
+		} else {
+			cart.push({ productId: id, title, sku, qty: quantity });
+		}
+		saveCart();
+		showToast(`${quantity} x ${title} added to cart`);
+	};
+
+	loadCart();
+
+	loadCatalog();
+
+	// Mobile nav toggle
+	document.getElementById('navToggle').addEventListener('click', function() {
+		const menu = document.getElementById('navMenu');
+		const expanded = this.getAttribute('aria-expanded') === 'true';
+		this.setAttribute('aria-expanded', String(!expanded));
+		menu.classList.toggle('is-open');
+	});
+	</script>
+</body>
+
+</html>

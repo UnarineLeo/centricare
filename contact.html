@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CentriCare | Contact</title>
+    <meta name="description" content="Contact CentriCare for facilities management and hygiene services.">
+    <meta name="robots" content="index, follow">
+    <link href="img/favicon.png" rel="icon">
+    <link href="css/pages.css?v=2" rel="stylesheet">
+</head>
+<body class="cc-storefront">
+    <nav class="cc-nav">
+        <a href="index.html" class="cc-nav__brand">
+            <img src="./img/CentriCare-logo.png" alt="CentriCare Logo" class="cc-nav__logo">
+        </a>
+        <button class="cc-nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="cc-nav__menu" id="navMenu">
+            <a href="index.html" class="cc-nav__link">Home</a>
+            <a href="services.html" class="cc-nav__link">Services</a>
+            <a href="industries.html" class="cc-nav__link">Industries</a>
+            <a href="clients.html" class="cc-nav__link">Clients</a>
+            <a href="about.html" class="cc-nav__link">About Us</a>
+            <a href="contact.html" class="cc-nav__cta active">Contact Us</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="page-split page-split--contact">
+            <div class="page-split__media">
+                <img class="contact-logo" src="./img/CentriCare-logo-inverse.png" alt="CentriCare Logo White">
+            </div>
+            <div class="page-split__content">
+                <span class="eyebrow"><span class="dot"></span> Contact</span>
+                <h1>Start the conversation.</h1>
+                <p class="lede">Tell us what you need and we will keep the process simple from the first call onward.</p>
+                <p class="lede">We are available for facilities management, hygiene, supplies, and uniform enquiries.</p>
+                <ul class="page-split__list">
+                    <li>2 Bruton Road, Bryanston, Gauteng, South Africa, 2191</li>
+                    <li>Tel: +27 (0) 71 472 7120</li>
+                    <li>Phone: +27 (0) 11 300 0800</li>
+                    <li>Email: <a href="mailto:tebogo@centricare.co.za" class="text-teal text-decoration-none">tebogo@centricare.co.za</a></li>
+                    <li>Website: <a href="https://www.centricare.co.za" class="text-teal text-decoration-none" target="_blank">www.centricare.co.za</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="logo-container">
+                        <img src="./img/CentriCare-logo-inverse.png" alt="CentriCare Logo White" width="100%">
+                    </div>
+                </div>
+
+                <div class="col-md-1 d-none d-md-block">
+                    <div class="v-line"></div>
+                </div>
+
+                <div class="col-md-5 ps-md-5">
+                    <h6 class="contact-header">Contact</h6>
+                    <p class="contact-detail">We look forward to partnering with you to deliver exceptional facilities management 
+                        solutions. Get in touch with us today!
+                    </p>
+                    <p class="contact-detail"><span class="text-teal">Address:</span></p>
+                    <p class="contact-detail">2 Bruton Road</p>
+                    <p class="contact-detail">Bryanston, Gauteng</p>
+                    <p class="contact-detail">South Africa, 2191</p>
+
+                    <p class="contact-detail"><span class="text-teal">Phone & Mobile</span></p>
+                    <p class="contact-detail"><span class="text-teal">Tel:</span> (+27) 071 472 7120</p>
+                    <p class="contact-detail"><span class="text-teal">Phone:</span> (+27) 011 300 0800</p>
+
+                    <p class="contact-detail"><span class="text-teal">Online</span></p>
+                        <p class="contact-detail"><span class="text-teal">Email:</span> 
+                    <a href="mailto:tebogo@centricare.co.za" class="text-white text-decoration-none">tebogo@centricare.co.za</a>
+                    <p class="contact-detail"><span class="text-teal">Website:</span> 
+                        <a href="https://www.centricare.co.za" class="text-white text-decoration-none" target="_blank">www.centricare.co.za</a>
+                    </p>
+
+                    <a class="fw-bold text-teal text-decoration-none" href="contact.html">Open the contact page <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navMenu.classList.toggle('is-open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('is-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

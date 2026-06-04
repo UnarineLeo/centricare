@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cart</title>
+	
+	<meta name="title" content="Centricare | Facilities Management & Cleaning Services South Africa">
+    <meta name="description" content="Centricare is a 100% black woman-owned leader in facilities management, hygiene services, and healthcare supplies in South Africa. 16+ years of excellence in cleaning, waste management, and office furniture.">
+    <meta name="keywords" content="facilities management south africa, professional cleaning services gauteng, hygiene services johannesburg, black woman owned business, waste management services, pest control south africa, hospital furniture suppliers, uniform distribution">
+    
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link href="img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link href="css/uniform.css?v=2" rel="stylesheet">
+</head>
+<body class="cc-storefront cc-cart-page">
+
+	<!-- Navbar Start -->
+	<nav class="cc-nav">
+        <a href="index.html" class="cc-nav__brand">
+            <img src="./img/CentriCare-logo.png" alt="CentriCare Logo" class="cc-nav__logo">
+        </a>
+        <button class="cc-nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="cc-nav__menu" id="navMenu">
+            <a href="index.html" class="cc-nav__link">Home</a>
+            <a href="services.html" class="cc-nav__link">Services</a>
+            <a href="industries.html" class="cc-nav__link">Industries</a>
+            <a href="clients.html" class="cc-nav__link">Clients</a>
+            <a href="about.html" class="cc-nav__link">About Us</a>
+            <a href="contact.html" class="cc-nav__cta active">Contact Us</a>
+        </div>
+    </nav>
+	<!-- Navbar End -->
+
+	<main class="page">
+		<section class="hero">
+			<div class="hero-card">
+				<span class="eyebrow"><span class="dot"></span> Cart and checkout</span>
+				<h1>Review your order.</h1>
+				<p class="lede">
+					Check the items in your cart, adjust quantities, then enter your email and phone number before submitting the order.
+				</p>
+			</div>
+			<aside class="side-card">
+				<div>
+					<span class="eyebrow"><span class="dot"></span> Checkout flow</span>
+					<h2>Keep the order short, clear, and ready for follow-up.</h2>
+				</div>
+				<div class="api-block">
+					<span class="api-label">What happens next</span>
+					<ul class="hint-list">
+						<li>Review the cart quantity before submitting</li>
+						<li>Enter the customer details for the mail draft</li>
+						<li>Our team confirms stock and next steps by email</li>
+					</ul>
+				</div>
+			</aside>
+		</section>
+
+		<section class="toolbar" aria-label="Checkout controls">
+			<div class="button-row">
+				<button class="secondary" style="background-color: var(--navy); color: #fff;" id="backButton" type="button">Back to uniform</button>
+				<button class="secondary" style="background-color: var(--teal); color: #fff;"  id="clearCartButton" type="button">Clear cart</button>
+			</div>
+			<div class="pill"><strong id="cartCountLabel">0</strong> items in cart</div>
+		</section>
+
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+		<section class="checkout-shell" aria-labelledby="cartHeading">
+			<div class="checkout-head">
+				<div>
+					<span class="eyebrow"><span class="dot"></span> Cart summary</span>
+					<h2 id="cartHeading">Your selected products</h2>
+					<p class="checkout-copy">Update quantities directly here, then submit the order to info@centricare.co.za.</p>
+				</div>
+				<div class="checkout-total">
+					<strong><span id="cartCount">0</span> items</strong>
+					<span>Total selected quantity</span>
+				</div>
+			</div>
+
+			<div class="checkout-grid">
+				<div>
+					<h3>Items in cart</h3>
+					<ul id="cartList" class="cart-list"></ul>
+					<div id="cartEmpty" class="cart-empty">No items are in your cart yet. Go back to the catalog and add products first.</div>
+				</div>
+
+				<form id="checkoutForm" class="checkout-form">
+                    <label>
+						<span>Full Names</span>
+						<input id="customerName" type="text" placeholder="John Doe" required>
+					</label>
+					<label>
+						<span>Email address</span>
+						<input id="customerEmail" type="email" placeholder="you@example.com" required>
+					</label>
+					<label>
+						<span>Phone number</span>
+						<input id="customerPhone" type="tel" placeholder="+27 71 000 0000" required>
+					</label>
+					<div class="cart-actions">
+						<button id="submitOrder" class="primary" type="submit">Submit order</button>
+						<button id="clearCartInline" class="secondary" style="background-color: var(--teal); color: #fff;"  type="button">Clear cart</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		const cartStorageKey = 'catalog_cart';
+		const backButton = document.getElementById('backButton');
+		const clearCartButton = document.getElementById('clearCartButton');
+		const clearCartInline = document.getElementById('clearCartInline');
+		const cartListNode = document.getElementById('cartList');
+		const cartEmptyNode = document.getElementById('cartEmpty');
+		const cartCountNode = document.getElementById('cartCount');
+		const cartCountLabel = document.getElementById('cartCountLabel');
+		const checkoutForm = document.getElementById('checkoutForm');
+		const customerName = document.getElementById('customerName');
+		const customerEmail = document.getElementById('customerEmail');
+		const customerPhone = document.getElementById('customerPhone');
+		const submitOrderBtn = document.getElementById('submitOrder');
+		const toastNode = document.getElementById('toast');
+
+		let cart = [];
+
+		function escapeHtml(value) {
+			return String(value)
+				.replaceAll('&', '&amp;')
+				.replaceAll('<', '&lt;')
+				.replaceAll('>', '&gt;')
+				.replaceAll('"', '&quot;')
+				.replaceAll("'", '&#39;');
+		}
+
+		function loadCart() {
+			try {
+				const raw = localStorage.getItem(cartStorageKey);
+				cart = raw ? JSON.parse(raw) || [] : [];
+			} catch {
+				cart = [];
+			}
+		}
+
+		function saveCart() {
+			try {
+				localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+			} catch {
+				/* ignore storage failures */
+			}
+		}
+
+		function showToast(message) {
+			toastNode.textContent = message;
+			toastNode.classList.add('is-visible');
+			window.clearTimeout(showToast._timer);
+			showToast._timer = window.setTimeout(() => toastNode.classList.remove('is-visible'), 2200);
+		}
+
+		function getTotalQuantity() {
+			return cart.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+		}
+
+		function updateCounters() {
+			const totalQuantity = getTotalQuantity();
+			cartCountNode.textContent = String(totalQuantity);
+			cartCountLabel.textContent = String(totalQuantity);
+		}
+
+		function renderCart() {
+			cartListNode.innerHTML = '';
+			updateCounters();
+
+			if (!cart.length) {
+				cartEmptyNode.style.display = 'block';
+				cartListNode.style.display = 'none';
+				return;
+			}
+
+			cartEmptyNode.style.display = 'none';
+			cartListNode.style.display = 'grid';
+
+			cart.forEach((item, index) => {
+				const li = document.createElement('li');
+				li.className = 'cart-item';
+
+				const meta = document.createElement('div');
+				meta.innerHTML = `<div><strong>${escapeHtml(item.title || item.name || item.sku || 'Item')}</strong></div><div class="item-meta">${item.sku ? `<span>SKU: ${escapeHtml(item.sku)}</span>` : ''}${item.productId ? `<span>ID: ${escapeHtml(item.productId)}</span>` : ''}</div>`;
+
+				const actions = document.createElement('div');
+				actions.className = 'cart-item-actions';
+
+				const minusButton = document.createElement('button');
+				minusButton.type = 'button';
+				minusButton.textContent = '-';
+				minusButton.addEventListener('click', () => {
+					const quantity = Number(item.qty) || 1;
+					if (quantity > 1) {
+						item.qty = quantity - 1;
+					} else {
+						cart.splice(index, 1);
+					}
+					saveCart();
+					renderCart();
+					showToast('Cart updated');
+				});
+
+				const quantityLabel = document.createElement('span');
+				quantityLabel.textContent = String(Number(item.qty) || 1);
+
+				const plusButton = document.createElement('button');
+				plusButton.type = 'button';
+				plusButton.textContent = '+';
+				plusButton.addEventListener('click', () => {
+					item.qty = (Number(item.qty) || 1) + 1;
+					saveCart();
+					renderCart();
+					showToast('Cart updated');
+				});
+
+				actions.append(minusButton, quantityLabel, plusButton);
+				li.append(meta, actions);
+				cartListNode.appendChild(li);
+			});
+		}
+
+		function clearCart() {
+			cart = [];
+			saveCart();
+			renderCart();
+			showToast('Cart cleared');
+		}
+
+		async function submitOrder(event) {
+			event.preventDefault();
+
+			if (!cart.length) {
+				alert('Your cart is empty.');
+				return;
+			}
+
+			const name = customerName.value.trim();
+			const email = customerEmail.value.trim();
+			const phone = customerPhone.value.trim();
+
+			if (!name || !email || !phone) {
+				alert('Please add your full name, email address, and phone number.');
+				return;
+			}
+
+			submitOrderBtn.disabled = true;
+			submitOrderBtn.textContent = 'Sending...';
+
+			try {
+				const response = await fetch('/proxy.php?action=sendorder', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						name,
+						email,
+						phone,
+						items: cart
+					})
+				});
+
+				const result = await response.json().catch(() => ({}));
+
+				if (!response.ok || !result.ok) {
+					throw new Error(result.error || 'Unable to send order');
+				}
+
+				cart = [];
+				saveCart();
+				renderCart();
+				checkoutForm.reset();
+				showToast('Order sent successfully. Cart cleared.');
+			} catch (error) {
+				alert(error.message || 'Unable to send order at the moment.');
+			} finally {
+				submitOrderBtn.disabled = false;
+				submitOrderBtn.textContent = 'Submit order';
+			}
+		}
+
+		backButton.addEventListener('click', () => {
+			window.location.href = 'uniform.html';
+		});
+		clearCartButton.addEventListener('click', clearCart);
+		clearCartInline.addEventListener('click', clearCart);
+		checkoutForm.addEventListener('submit', submitOrder);
+
+		loadCart();
+		renderCart();
+
+		// Mobile nav toggle
+		document.getElementById('navToggle').addEventListener('click', function() {
+			const menu = document.getElementById('navMenu');
+			const expanded = this.getAttribute('aria-expanded') === 'true';
+			this.setAttribute('aria-expanded', String(!expanded));
+			menu.classList.toggle('is-open');
+		});
+	</script>
+</body>
+
+</html>
