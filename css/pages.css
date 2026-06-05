@@ -674,6 +674,26 @@ section + section { margin-top: 0 !important; }
     flex-shrink: 0;
 }
 
+/* Service title under the circle visual */
+.cc-service-title {
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    font-weight: 800;
+    text-align: center;
+    margin-top: 12px;
+    color: var(--text-gray);
+}
+
+.cc-service-title .fw-bold {
+    font-weight: 800 !important;
+}
+
+/* Center the circle container for better alignment */
+.cc-circle-container { margin: 0 auto; }
+
+@media (min-width: 768px) {
+    .cc-service-title { font-size: 1.25rem; margin-top: 16px; }
+}
+
 .cc-circle-main {
     width: 200px;
     height: 280px;
