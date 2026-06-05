@@ -18,6 +18,7 @@
     --cc-navy:           #1b3d5c;   /* ← deep navy background */
     --cc-navy-soft:      rgba(27, 61, 92, 0.07);
     --cc-navy-border:    rgba(27, 61, 92, 0.12);
+    --cc-blue:          #007bff;   /* ← used in logo */
 
     /* Accent palette — matched to the 8 service badge colours */
     --cc-orange:         #f5a623;   /* badge 01 - Cleaning */
@@ -66,6 +67,7 @@
     --shadow-sm:         var(--cc-shadow-sm);
     --shadow-md:         var(--cc-shadow-md);
     --transition:        var(--cc-transition);
+    --blue:              var(--cc-blue);
 }
 
 p {
