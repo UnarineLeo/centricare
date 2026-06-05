@@ -740,6 +740,17 @@ section + section { margin-top: 0 !important; }
     box-shadow: var(--cc-shadow-md);
 }
 
+/* Single full-circle image (use when only one image should show inside the circle) */
+.cc-circle-single-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .cc-number-circle {
     position: absolute;
     bottom: 0;
