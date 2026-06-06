@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/centrldw/github
+    - export DEPLOYPATH=/home/centrldw/public_html
     - /bin/cp -R ./ $DEPLOYPATH
