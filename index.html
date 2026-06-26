@@ -10,163 +10,514 @@
     <meta name="robots" content="index, follow">
     <link href="img/favicon.png" rel="icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="css/pages.css?v=4" rel="stylesheet">
+    <link href="css/pages.css?v=5" rel="stylesheet">
     <style>
-        .hero-note {
-            color: rgba(255, 255, 255, 0.72);
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
+
+        .cc-home-reinvent {
+            --home-ink: #0d2334;
+            --home-ocean: #113a59;
+            --home-sky: #0d7f9f;
+            --home-mint: #2dcece;
+            --home-paper: #ffffff;
+            --home-shadow: 0 24px 45px rgba(13, 35, 52, 0.16);
+            --home-shadow-soft: 0 14px 28px rgba(13, 35, 52, 0.1);
+            font-family: 'Outfit', 'DM Sans', sans-serif;
+            color: var(--home-ink);
+            background: radial-gradient(circle at 15% -5%, #d7f4ff 0%, rgba(215, 244, 255, 0) 40%), radial-gradient(circle at 90% 0%, rgba(45, 206, 206, 0.17) 0%, rgba(45, 206, 206, 0) 36%), #f7fafc;
         }
 
-        .section-link-inline {
-            display: inline-block;
-            margin-top: 16px;
+        .cc-home-reinvent h1,
+        .cc-home-reinvent h2,
+        .cc-home-reinvent h3,
+        .cc-home-reinvent h4 {
+            font-family: 'Sora', 'DM Sans', sans-serif;
+            letter-spacing: -0.02em;
         }
 
-        .service-tag {
-            font-size: 0.8rem;
-        }
-
-        .header-services {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-            width: 100%;
-            max-width: 980px;
-        }
-
-        .header-services .cc-services-item {
-            width: 100%;
-        }
-
-        .header-services .cc-circle-container-sm {
-            width: 170px !important;
-            height: 170px !important;
-            margin: 0 auto 10px;
-        }
-
-        .header-services .cc-circle-container-sm .cc-circle-main,
-        .header-services .cc-circle-container-sm .cc-left-half-img,
-        .header-services .cc-circle-container-sm .cc-top-right-img,
-        .header-services .cc-circle-container-sm .cc-bottom-right-colored {
-            width: 100%;
-            height: 100%;
-        }
-
-        .header-service-link {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 14px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            text-decoration: none;
-            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-        }
-
-        .header-service-link:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .header-service-link strong {
-            font-size: 0.95rem;
-            line-height: 1.2;
-        }
-
-        .header-service-link span {
-            font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.72);
-            line-height: 1.35;
-        }
-
-        .header-service-link--wide {
-            grid-column: 1 / -1;
-        }
-
-        .header-services .service-tag {
-            color: rgba(255, 255, 255, 0.88);
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .header-services__footer {
-            grid-column: 1 / -1;
-        }
-
-        .button-group {
-            display: none;
-        }
-
-        .custom-btn {
-            display: block;
-            padding: 16px 20px;
-            font-size: 1.05rem;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        .cc-home-reinvent p {
             text-align: left;
+        }
+
+        .home-shell {
+            width: min(1220px, calc(100% - 2.5rem));
+            margin: 0 auto;
+        }
+
+        .home-hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(120deg, #0d2334 0%, #113a59 52%, #0d7f9f 100%);
+            padding: 84px 0 78px;
+            color: #ffffff;
+        }
+
+        .home-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 22px);
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        .home-hero__layout {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1.06fr;
+            gap: 40px;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .home-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 7px 14px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 16px;
             font-weight: 600;
         }
 
-        .outline-btn {
-            border: 2px solid #fff;
+        .home-title {
+            font-size: clamp(2.2rem, 4.8vw, 4.1rem);
+            line-height: 1.04;
+            margin: 0 0 16px;
+            max-width: 13ch;
             color: #fff;
+        }
+
+        .home-title strong {
+            color: var(--home-mint);
+            font-weight: 800;
+        }
+
+        .home-subtitle {
+            margin: 0;
+            font-size: 1.04rem;
+            line-height: 1.72;
+            max-width: 54ch;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .home-hero__actions {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .home-hero__visual {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: var(--home-shadow);
+            min-height: 420px;
+            background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+        }
+
+        .home-hero__visual img {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-visual__badge {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            background: rgba(13, 35, 52, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 12px;
+            padding: 10px 12px;
+            color: #fff;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+
+        .hero-visual__badge strong {
+            color: var(--home-mint);
+        }
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .home-btn--solid {
+            background: #fff;
+            color: var(--home-ink);
+            box-shadow: var(--home-shadow-soft);
+        }
+
+        .home-btn--ghost {
             background: transparent;
-        }
-
-        .outline-btn:hover {
-            background-color: #fff;
-            color: #0b1f3a;
-        }
-
-        .filled-btn {
-            background-color: #1abc9c;
             color: #fff;
-            border: 2px solid #1abc9c;
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
-        .filled-btn:hover {
-            background-color: #159a80;
-            border-color: #159a80;
+        .home-hero__album {
+            position: relative;
+            min-height: 460px;
+            perspective: 1000px;
+        }
+
+        .hero-album-card {
+            position: absolute;
+            width: min(260px, 42vw);
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid rgba(13, 35, 52, 0.13);
+            padding: 12px;
+            box-shadow: var(--home-shadow);
+            transform-origin: center center;
+            transition: transform 0.35s ease;
+            text-decoration: none;
+            color: var(--home-ink);
+            animation: heroFloat 5.5s ease-in-out infinite;
+        }
+
+        .hero-album-card:hover {
+            transform: translateY(-8px) rotate(0deg) scale(1.02) !important;
+        }
+
+        .hero-album-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hero-album-card span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .hero-album-card--a { top: 6%; left: 10%; transform: rotate(-9deg); z-index: 2; animation-delay: 0.1s; }
+        .hero-album-card--b { top: 2%; right: 8%; transform: rotate(8deg); z-index: 4; animation-delay: 0.9s; }
+        .hero-album-card--c { top: 38%; left: 0; transform: rotate(-4deg); z-index: 5; animation-delay: 0.45s; }
+        .hero-album-card--d { top: 44%; right: 4%; transform: rotate(10deg); z-index: 3; animation-delay: 1.2s; }
+        .hero-album-card--e { top: 24%; left: 34%; transform: rotate(2deg); z-index: 6; animation-delay: 1.6s; }
+
+        .home-stats {
+            padding: 20px 0 0;
+            margin-top: -38px;
+            position: relative;
+            z-index: 4;
+        }
+
+        .home-stats__inner {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .home-stat {
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(13, 35, 52, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 18px 16px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: var(--home-shadow-soft);
+        }
+
+        .home-stat strong {
+            display: block;
+            color: var(--home-ocean);
+            font-size: clamp(1.35rem, 2vw, 2rem);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .home-stat span {
+            color: #39586f;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .home-merge {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-merge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.18;
+            background-size: cover;
+            background-position: center;
+            filter: saturate(0.95);
+            pointer-events: none;
+        }
+
+        .home-merge > section,
+        .home-merge > .home-stats {
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-merge--services::before {
+            background-image: url('img/services/clean_3.jpg');
+        }
+
+        .home-merge--partners::before {
+            background-image: url('img/clients/clean_3.jpg');
+        }
+
+        .home-section {
+            padding: 88px 0;
+        }
+
+        .home-section--services,
+        .home-section--about,
+        .home-section--clients {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-section--services::before,
+        .home-section--about::before,
+        .home-section--clients::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.18;
+            background-size: cover;
+            background-position: center;
+            filter: saturate(0.95);
+        }
+
+        .home-section--services::before {
+            background-image: url('img/services/clean_4.jpg');
+        }
+
+        .home-section--about::before {
+            /* background-image: url('img/services/clean_2.jpg'); */
+        }
+
+        .home-section--services .home-shell,
+        .home-section--about .home-shell,
+        .home-section--clients .home-shell {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-group-list {
+            margin: 0;
+            padding-left: 18px;
+            line-height: 1.8;
+            color: #4f6a7f;
+        }
+
+        .section-head {
+            max-width: 760px;
+            margin-bottom: 28px;
+        }
+
+        .section-head__kicker {
+            display: inline-flex;
+            border-radius: 999px;
+            background: #dff8f7;
+            color: #0f6f7f;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            margin-bottom: 12px;
+        }
+
+        .section-head h2 {
+            margin: 0 0 12px;
+            color: var(--home-ink);
+            font-size: clamp(1.7rem, 3vw, 2.8rem);
+            line-height: 1.12;
+        }
+
+        .section-head p {
+            margin: 0;
+            color: #4f6a7f;
+            max-width: 62ch;
+            line-height: 1.72;
+        }
+
+        .service-album {
+            display: grid;
+            gap: 22px;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+        .service-album-card {
+            position: relative;
+            display: block;
+            padding: 10px;
+            background: var(--home-paper);
+            border-radius: 14px;
+            border: 1px solid rgba(13, 35, 52, 0.14);
+            box-shadow: var(--home-shadow-soft);
+            text-decoration: none;
+            color: var(--home-ink);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .service-album-card img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .service-album-card h3 { margin: 10px 0 2px; font-size: 0.92rem; color: var(--home-ocean); }
+        .service-album-card p { margin: 0; font-size: 0.74rem; color: #5b768c; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; }
+        .service-album-card:hover { transform: translateY(-8px) rotate(0deg) scale(1.02) !important; box-shadow: var(--home-shadow); }
+
+        .tilt-left { transform: rotate(-4deg); }
+        .tilt-right { transform: rotate(4deg); }
+        .tilt-soft-left { transform: rotate(-2deg); }
+        .tilt-soft-right { transform: rotate(2deg); }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .story-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(150deg, #ffffff 0%, #f2f8fd 100%);
+            border: 1px solid rgba(13, 35, 52, 0.12);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--home-shadow-soft);
+        }
+
+        .story-card h3 { margin: 0 0 10px; color: var(--home-ocean); font-size: 1.1rem; }
+        .story-card p { margin: 0 0 12px; color: #4f6a7f; line-height: 1.72; font-size: 0.95rem; }
+        .story-card a { color: #0f6f7f; font-weight: 700; text-decoration: none; }
+        .story-card::after { content: ''; position: absolute; top: -36px; right: -38px; width: 110px; height: 110px; border: 22px solid rgba(45, 206, 206, 0.15); border-radius: 50%; pointer-events: none; }
+
+        .industry-pins {
+            background: linear-gradient(160deg, #0f2b43 0%, #0f3d5e 62%, #0f6f7f 100%);
             color: #fff;
+            border-radius: 24px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
         }
 
-        #header {
-            min-height: 58vh;
+        .industry-pins::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(45, 206, 206, 0.3) 0%, rgba(45, 206, 206, 0) 40%); pointer-events: none; }
+
+        .industry-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
-        #header .row {
-            min-height: 58vh;
+        .industry-card { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 14px; padding: 10px; backdrop-filter: blur(3px); }
+        .industry-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+        .industry-card h3 { margin: 0 0 6px; font-size: 0.95rem; color: #fff; }
+        .industry-card p { margin: 0; color: rgba(255, 255, 255, 0.82); font-size: 0.86rem; line-height: 1.55; }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
         }
 
-        .header-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            line-height: 1.08;
+        .client-tile { background: #fff; border: 1px solid rgba(13, 35, 52, 0.12); border-radius: 14px; padding: 14px; display: flex; align-items: center; justify-content: center; min-height: 104px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .client-tile:hover { transform: translateY(-4px); box-shadow: var(--home-shadow-soft); }
+        .client-tile img { max-width: 100%; max-height: 68px; object-fit: contain; }
+
+        @keyframes ccRotateIn {
+            from { opacity: 0; transform: rotate(-10deg) scale(0.88); }
+            to { opacity: 1; transform: rotate(0deg) scale(1); }
         }
 
-        @media (max-width: 768px) {
-            .header-services {
-                width: 100%;
-                grid-template-columns: 1fr;
+        @keyframes ccSlideUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        [data-animate="rotate-in"].is-visible { animation-name: ccRotateIn; animation-duration: 0.72s; animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); }
+        [data-animate="slide-up"].is-visible { animation-name: ccSlideUp; animation-duration: 0.64s; animation-fill-mode: both; animation-timing-function: ease-out; }
+
+        @media (max-width: 1160px) {
+            .home-hero__layout { grid-template-columns: 1fr; gap: 30px; }
+            .home-hero__album { min-height: 390px; max-width: 640px; margin: 0 auto; }
+            .service-album { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .industry-grid, .story-grid, .home-stats__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .clients-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .home-hero__visual,
+            .home-hero__visual img {
+                min-height: 360px;
             }
+        }
 
-            .header-services .cc-circle-container-sm {
-                width: 112px;
-                height: 112px;
+        @media (max-width: 760px) {
+            .home-hero { padding: 64px 0 62px; }
+            .home-shell { width: min(1220px, calc(100% - 1.2rem)); }
+            .home-hero__album { min-height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+            .hero-album-card { position: relative; width: 100%; top: auto !important; left: auto !important; right: auto !important; transform: rotate(0deg) !important; animation: none; }
+            .home-hero__visual,
+            .home-hero__visual img {
+                min-height: 290px;
             }
+            .home-stats { margin-top: -22px; }
+            .home-section { padding: 70px 0; }
+            .service-album, .industry-grid, .story-grid, .clients-grid, .home-stats__inner { grid-template-columns: 1fr; }
+            .service-album-card, .tilt-left, .tilt-right, .tilt-soft-left, .tilt-soft-right { transform: rotate(0deg); }
+        }
 
-            #header,
-            #header .row {
-                min-height: auto;
+        @media (prefers-reduced-motion: reduce) {
+            [data-animate], [data-animate].is-visible, .hero-album-card {
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
             }
         }
     </style>
 </head>
 
-<body class="cc-storefront">
+<body class="cc-storefront cc-home-reinvent">
     <nav class="cc-nav">
         <a href="index" class="cc-nav__brand">
             <img src="./img/CentriCare-logo.png" alt="CentriCare Logo" class="cc-nav__logo">
@@ -184,393 +535,164 @@
         </div>
     </nav>
 
-    <section id="header" class="container-fluid overflow-hidden p-0 bg-navy">
-        <div class="container-fluid p-0">
-            <div class="row align-items-center g-0 px-4 px-md-5 py-5 py-md-0">
-                <div class="col-md-4 ps-md-3 text-white">
-                    <div class="header-title-container">
-                        <h1 class="header-title">
-                            Reliable <span class="text-teal fw-bold">service</span><br>
-                            across <span class="text-teal fw-bold">every</span> space.
-                        </h1>
-                        <p class="small hero-note mb-0">From hygiene and facilities management to infrastructure and supply services, we help organizations run efficiently.</p>
-                    </div>
+    <section id="header" class="home-hero">
+        <div class="home-shell home-hero__layout">
+            <div>
+                <div class="home-kicker" data-animate="fade-up">South Africa&apos;s trusted facility partner</div>
+                <h1 class="home-title" data-animate="fade-up" style="animation-delay:0.08s;">
+                    One team, every space, <strong>always clean</strong> and ready.
+                </h1>
+                <p class="home-subtitle" data-animate="fade-up" style="animation-delay:0.16s;">
+                    CentriCare combines facilities management, hygiene, uniforms, waste solutions, and infrastructure support to keep operations smooth across healthcare, retail, education, and government environments.
+                </p>
+                <div class="home-hero__actions" data-animate="fade-up" style="animation-delay:0.24s;">
+                    <a class="home-btn home-btn--solid" href="services">Explore services <i class="fas fa-arrow-right"></i></a>
+                    <a class="home-btn home-btn--ghost" href="contact">Book a consultation</a>
                 </div>
-                
-                <div class="col-md-8 d-flex justify-content-center align-items-center pt-4 pt-md-0">
-                    <div class="header-services">
+            </div>
 
-                        <div class="cc-services-item">
-                            <a href="services#cleaning-services" class="cc-service-link text-decoration-none">
-                            <div class="cc-circle-container-sm border-2px-white">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img24.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-orange">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">01</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Cleaning</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="services#hygiene-services" class="cc-service-link text-decoration-none">
-                            <div class="cc-circle-container-sm">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img27.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-yellow">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">02</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Hygiene</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="services#hygiene-equipment" class="cc-service-link text-decoration-none">
-                            <div class="cc-circle-container-sm">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img31.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-lime">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">03</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Hygiene equipment</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="services#pest-control" class="cc-service-link text-decoration-none">
-                            <div class="cc-circle-container-sm">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img35.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-red">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">04</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Pest control</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="services#window-cleaning" class="cc-service-link text-decoration-none">
-                            <div class="cc-circle-container-sm">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img37.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-purple">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">05</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Window care</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="services#waste-management" class="cc-servie-link text-decoration-none">
-                            <div class="cc-circle-container-sm">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img40.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-green">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">06</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Waste management</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="services#furniture-supply" class="cc-service-link text-decoration-none">
-                            <div class="cc-circle-container-sm">
-                                <div class="cc-circle-main">
-                                    <div class="cc-circle-single-img" style="background-image:url('img/services/img84.jpg');"></div>
-                                    <div class="cc-bottom-right-colored bg-pink">
-                                        <p class="text-white m-0" style="font-size:11px;line-height:1.3;">07</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="my-2 service-tag">Furniture supply</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                            <a href="uniform" class="cc-service-link text-decoration-none">
-                                <div class="cc-circle-container-sm">
-                                        <div class="cc-circle-main">
-                                            <div class="cc-circle-single-img" style="background-image:url('img/services/img90.jpg');"></div>
-                                            <div class="cc-bottom-right-colored bg-light-purple">
-                                                <p class="text-white m-0" style="font-size:11px;line-height:1.3;">08</p>
-                                            </div>
-                                        </div>
-                                </div>
-                                <p class="my-2 service-tag">Uniforms</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                                <a href="services#construction" class="cc-service-link text-decoration-none">
-                                <div class="cc-circle-container-sm">
-                                    <div class="cc-circle-main">
-                                        <div class="cc-circle-single-img" style="background-image:url('img/industries/img49.jpg');"></div>
-                                        <div class="cc-bottom-right-colored bg-teal">
-                                            <p class="text-white m-0" style="font-size:11px;line-height:1.3;">09</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="my-2 service-tag">Construction</p>
-                            </a>
-                        </div>
-
-                        <div class="cc-services-item">
-                                <a href="services#accommodation" class="cc-service-link text-decoration-none">
-                                <div class="cc-circle-container-sm">
-                                    <div class="cc-circle-main">
-                                        <div class="cc-circle-single-img" style="background-image:url('img/services/accomodation_1.jpg');"></div>
-                                        <div class="cc-bottom-right-colored" style="background-color:#1075a7;">
-                                            <p class="text-white m-0" style="font-size:11px;line-height:1.3;">10</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="my-2 service-tag">Student Accommodation</p>
-                            </a>
-                        </div>
-
-                        <div class="header-services__footer">
-                            <a class="fw-bold text-teal text-decoration-none" href="services">See all services <i class="fas fa-arrow-right"></i></a>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="home-hero__visual" data-animate="fade-left" style="animation-delay:0.16s;" aria-label="Facilities service preview">
+                <img src="img/services/clean_2.jpg" alt="CentriCare team delivering facilities and hygiene services">
+                <div class="hero-visual__badge"><strong>Integrated delivery:</strong> Hygiene, facilities, operations, and supply</div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="overflow-hidden">
-
-    <section id="about" class="overflow-hidden">
-        <div class="container-fluid p-0">
-            <div class="row g-0 align-items-stretch">
-                <div class="col-md-5 d-none d-lg-block position-relative">
-                    <img class="cc-wall-image" src="img/banners/img96.jpg" alt="CentriCare cleaning products">
-                    <div class="letter-c-left"></div>
+    <div class="home-merge home-merge--services">
+        <section class="home-stats">
+            <div class="home-shell">
+                <div class="home-stats__inner">
+                    <div class="home-stat" data-animate="slide-up" style="animation-delay:0.06s;">
+                        <strong class="count-up" data-target="16" data-suffix="+">0</strong>
+                        <span>Years of excellence</span>
+                    </div>
+                    <div class="home-stat" data-animate="slide-up" style="animation-delay:0.12s;">
+                        <strong class="count-up" data-target="10">0</strong>
+                        <span>Service categories</span>
+                    </div>
+                    <div class="home-stat" data-animate="slide-up" style="animation-delay:0.18s;">
+                        <strong class="count-up" data-target="100" data-suffix="%">0</strong>
+                        <span>Black woman-owned</span>
+                    </div>
+                    <div class="home-stat" data-animate="slide-up" style="animation-delay:0.24s;">
+                        <strong class="count-up" data-target="9001" data-prefix="ISO ">0</strong>
+                        <span>9001:2015 certified standard</span>
+                    </div>
                 </div>
-                <div class="col-md-5 py-6 px-4 px-md-5">
-                    <div class="cc-header-2 bg-navy" style="margin-top: 10px;">About us</div>
-                    <p class="mb-3"><span class="text-teal fw-bold">CentriCare PTY Ltd</span>  is a trailblazing, <span class="text-teal fw-bold">100% black woman-owned</span> enterprise with a proven track record spanning over <span class="text-teal fw-bold">16 years</span>.</p>
-                    <p class="mb-3">Established in <span class="text-teal fw-bold">2009</span>, we have proudly emerged as a preferred service provider in healthcare supplies, infrastructure development, 
-                        and facilities management for both the public and private sectors in South Africa.
-                    </p>
-                    <p class="mb-3">At <span class="text-teal fw-bold">CentriCare PTY Ltd</span> , excellence is not just a goal; it is our standard. Our operational processes are rooted in internationally 
-                        recognized <span class="text-teal fw-bold">ISO 9001:2015 Quality Management Systems</span>, ensuring consistency, innovation, and superior outcomes across all our services.
-                    </p>
+            </div>
+        </section>
 
-                    <p class="mb-3">Our comprehensive service offerings include cleaning services, hygiene services, pest control, and waste
-                        management-ensuring every aspect of your facility operates at its best.
-                    </p>
-                    <a class="fw-bold text-teal text-decoration-none" href="about#about_about" style="margin-bottom: 20px;">Read more about us <i class="fas fa-arrow-right"></i></a>
+        <section id="services" class="home-section home-section--services">
+            <div class="home-shell">
+                <header class="section-head">
+                    <span class="section-head__kicker" data-animate="fade-up">Our Services</span>
+                </header>
+
+                <div class="story-grid">
+                    <article class="story-card" data-animate="fade-right">
+                        <h3>Hygiene & Cleaning Solutions</h3>
+                        <ul class="service-group-list">
+                            <li>Hygiene Services</li>
+                            <li>Window Cleaning</li>
+                            <li>Hygiene Equipment</li>
+                            <li>Pest Control</li>
+                        </ul>
+                        <a href="services#hygiene-services">Explore cleaning services <i class="fas fa-arrow-right"></i></a>
+                    </article>
+                    <article class="story-card" data-animate="fade-up" style="animation-delay:0.09s;">
+                        <h3>Facilities & Infrastructure</h3>
+                        <ul class="service-group-list">
+                            <li>Construction</li>
+                            <li>Student Accommodation</li>
+                        </ul>
+                        <a href="services#construction">See infrastructure services <i class="fas fa-arrow-right"></i></a>
+                    </article>
+                    <article class="story-card" data-animate="fade-left" style="animation-delay:0.14s;">
+                        <h3>Operations & Supply</h3>
+                        <ul class="service-group-list">
+                            <li>Waste Management</li>
+                            <li>Furniture Supply</li>
+                            <li>Uniforms</li>
+                        </ul>
+                        <a href="services#waste-management">Explore operations services <i class="fas fa-arrow-right"></i></a>
+                    </article>
                 </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="about" class="home-section home-section--about" style="padding-top:24px;">
+        <div class="home-shell">
+            <header class="section-head">
+                <span class="section-head__kicker" data-animate="fade-up">Who We Are</span>
+                <h2 data-animate="fade-up" style="animation-delay:0.05s;">A woman-led team building cleaner, safer spaces since 2009.</h2>
+            </header>
+            <div class="story-grid">
+                <article class="story-card" data-animate="fade-right">
+                    <h3>About CentriCare</h3>
+                    <p>CentriCare PTY Ltd is a 100% black woman-owned enterprise with over 16 years of experience in facilities management, healthcare supplies, and infrastructure support.</p>
+                    <a href="about#about_about">Read more about us <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="story-card" data-animate="fade-up" style="animation-delay:0.09s;">
+                    <h3>Vision and Mission</h3>
+                    <p>We aim to raise standards through quality service, innovation, and partnerships that improve everyday environments in public and private sectors.</p>
+                    <a href="about#mission_about">See mission details <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="story-card" data-animate="fade-left" style="animation-delay:0.14s;">
+                    <h3>Expertise and Values</h3>
+                    <p>From hygiene and pest control to waste and uniforms, every service is delivered through ISO 9001:2015 aligned quality systems and value-driven execution.</p>
+                    <a href="expertise">Explore expertise <i class="fas fa-arrow-right"></i></a>
+                </article>
             </div>
         </div>
     </section>
 
-    <section id="mission" class="overflow-hidden text-white">
-        <div class="container-fluid p-0 bg-navy">
-            <div class="row g-0 align-items-stretch">
-                <div class="col-md-4 p-4 p-md-5">
-                    <div class="cc-header-2 bg-teal">Vision</div>
-                    <p class="text-white small">To be a beacon of excellence and innovation in healthcare supplies, infrastructure development, clothing, textile, footwear and facilities 
-                        management, redefining industry standards and empowering communities while building a sustainable future.
-                    </p>
-                    <div class="cc-header-2 bg-teal mt-3">Mission</div>
-                    <p class="text-white small">To deliver exceptional services that prioritize quality, innovation, and customer satisfaction.
-                        By embracing cutting-edge practices and fostering meaningful partnerships, we strive to create clean, safe, and efficient environments that 
-                        positively impact lives and drive progress in the public and private sectors.
-                    </p>
-                    <a class="fw-bold text-teal text-decoration-none" href="about#mission_about">See the full mission <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="col-md-4 p-4 p-md-5">
-                    <div class="cc-header-2 bg-teal">Values</div>
-                    <p class="text-white small mb-0">We have 5 core values that guide our actions and decisions.</p>
-                    <ul class="page-split__list">
-                        <li><span class="text-teal fw-bold">Excellence</span> in every service touchpoint</li>
-                        <li><span class="text-teal fw-bold">Integrity</span> in every relationship</li>
-                        <li><span class="text-teal fw-bold">Innovation</span> that improves outcomes</li>
-                        <li><span class="text-teal fw-bold">Sustainability</span> in daily practice</li>
-                        <li><span class="text-teal fw-bold">Community impact</span> that lasts</li>
-                    </ul>
-                    <a class="fw-bold text-teal text-decoration-none section-link-inline" href="about#values_about">Explore values <i class="fas fa-arrow-right"></i></a>
-                    <div class="cc-quote-card">
-                        <span class="cc-quote-mark">&rdquo;</span>
-                        <p class="cc-quote-text" style="text-align: left;">To be a beacon of <strong>excellence</strong> and <strong>innovation</strong></p>
+    <div class="home-merge home-merge--partners">
+        <section id="industries" class="home-section" style="padding-top:0;">
+            <div class="home-shell">
+                <div class="industry-pins" data-animate="fade-up">
+                    <header class="section-head" style="margin-bottom:22px;max-width:900px;">
+                        <span class="section-head__kicker" style="background:rgba(255,255,255,0.18);color:#fff;" data-animate="fade-up">Industries</span>
+                        <h2 style="color:#fff;animation-delay:0.05s;" data-animate="fade-up">Reliable service where operational pressure is highest.</h2>
+                        <p style="color:rgba(255,255,255,0.82);animation-delay:0.1s;" data-animate="fade-up">We support high-traffic and high-compliance environments with sector-aware service models and responsive teams.</p>
+                    </header>
+
+                    <div class="industry-grid">
+                        <article class="industry-card" data-animate="scale-in"><img src="img/industries/img53.jpg" alt="Hospitality and tourism operations"><h3>Hospitality and Tourism</h3><p>Guest-ready spaces with consistent hygiene and presentation.</p></article>
+                        <article class="industry-card" data-animate="scale-in" style="animation-delay:0.08s;"><img src="img/industries/img45.jpg" alt="Healthcare facilities"><h3>Healthcare Facilities</h3><p>Sanitation and waste systems aligned with strict health standards.</p></article>
+                        <article class="industry-card" data-animate="scale-in" style="animation-delay:0.16s;"><img src="img/industries/img46.jpg" alt="Retail environments"><h3>Retail and Commercial</h3><p>Clean, safe environments that protect customer experience.</p></article>
+                        <article class="industry-card" data-animate="scale-in" style="animation-delay:0.24s;"><img src="img/industries/img44.jpg" alt="Education institutions"><h3>Education Institutions</h3><p>Reliable hygiene programs for schools and universities.</p></article>
+                        <article class="industry-card" data-animate="scale-in" style="animation-delay:0.32s;"><img src="img/industries/img51.jpg" alt="Government facilities"><h3>Government Facilities</h3><p>Community-centered service delivery for public spaces.</p></article>
+                        <article class="industry-card" data-animate="scale-in" style="animation-delay:0.4s;"><img src="img/industries/img49.jpg" alt="Construction sites"><h3>Real Estate and Construction</h3><p>Post-build cleanup and maintenance for move-in readiness.</p></article>
                     </div>
-                </div>
-                <div class="col-md-4 p-0 d-none d-lg-block position-relative">
-                    <img class="cc-wall-image" src="img/banners/img98.jpg" alt="CentriCare window cleaning">
-                    <div class="letter-c-right"></div>
+
+                    <p style="margin-top:18px;"><a href="industries" class="text-white text-decoration-none fw-bold">Explore all industries <i class="fas fa-arrow-right"></i></a></p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="expertise" class="overflow-hidden">
-        <div class="container-fluid p-0">
-            <div class="row g-0 align-items-stretch">
-                <div class="col-md-5 d-none d-lg-block position-relative">
-                    <img class="cc-wall-image" src="img/banners/img100.jpg" alt="CentriCare cleaning products">
-                    <div class="letter-c-left"></div>
-                </div>
-                <div class="col-md-7 p-4 p-md-5">
-                    <div class="cc-header-2 bg-teal">Expertise</div>
-                    <p> At <span class="text-teal fw-bold">CentriCare PTY Ltd</span> , we are dedicated to delivering excellence in every aspect of hygiene, cleaning, and facility care. 
-                        Our comprehensive range of services is tailored to meet the diverse needs of our clients, ensuring clean, safe, and 
-                        well-maintaned environments across various sectors.
-                    </p>
-                    <br>
-                    <div class="cc-header-2 bg-navy">Approach</div>
-                    <p> Our approach is built on delivering excellence through innovation, collaboration, and attention to
-                        detail. We implement internationally recognized quality management systems, including ISO 9001:2015, to ensure
-                        consistent and reliable service delivery across all sectors.
-                    </p>
-                    <!-- <p>Then we keep the service clear, trained, and easy to manage.</p> -->
-                    <a class="fw-bold text-teal text-decoration-none" href="expertise">View our expertise & approach<i class="fas fa-arrow-right"></i></a>
+        <section id="clients" class="home-section home-section--clients" style="padding-top:0;">
+            <div class="home-shell">
+                <header class="section-head">
+                    <span class="section-head__kicker" data-animate="fade-up">Clients</span>
+                    <h2 data-animate="fade-up" style="animation-delay:0.05s;">Trusted by organizations that need reliability every day.</h2>
+                </header>
 
+                <div class="clients-grid">
+                    <div class="client-tile" data-animate="slide-up"><img src="./img/clients/img55.jpg" alt="Fourways Mall logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.05s;"><img src="./img/clients/img56.jpg" alt="Future Space logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.1s;"><img src="./img/clients/img57.jpg" alt="Safety Critical Solutions logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.15s;"><img src="./img/clients/img58.jpg" alt="Tibs logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.2s;"><img src="./img/clients/img59.jpg" alt="RSG Engineering logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.25s;"><img src="./img/clients/img60.jpg" alt="Dirt Diggers logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.3s;"><img src="./img/clients/smu.jpg" alt="SMU logo"></div>
+                    <div class="client-tile" data-animate="slide-up" style="animation-delay:0.35s;"><img src="./img/clients/verb.jpg" alt="Verb logo"></div>
                 </div>
+
+                <p style="margin-top:18px;"><a class="fw-bold text-teal text-decoration-none" href="clients">View our clients <i class="fas fa-arrow-right"></i></a></p>
             </div>
-        </div>
-    </section>
-
-    <section id="industries" class="overflow-hidden text-white">
-        <div class="container-fluid p-0 bg-navy">
-            <div class="row position-relative">
-                <div class="col-md-2 p-0">
-                    <div class="cc-top-left-shape">
-                        <p class="text-white fw-bold">Industries</p>
-                    </div>
-                </div>
-            </div>
-            <div class="home-industries p-4 p-md-5">
-                <h2 class="cc-header-2 bg-navy text-center w-100">_</h2>
-
-                <div class="home-industries__grid">
-                    <div class="home-industries__item">
-                        <div class="cc-shape-item">
-                            <div class="cc-shape-visual">
-                                <div class="cc-partial-ring"></div>
-                                <div class="cc-partial-photo" style="background-image:url('img/industries/img43.jpg');"></div>
-                            </div>
-                            <div class="cc-shape-text">
-                                <h2 class="industry-header">Hospitality and Tourism</h2>
-                                <p>Ensuring hotels, resorts, and event venues maintain impeccable hygiene and comfort to provide exceptional guest experiences.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="home-industries__item">
-                        <div class="cc-shape-item">
-                            <div class="cc-shape-visual">
-                                <div class="cc-partial-ring"></div>
-                                <div class="cc-partial-photo" style="background-image:url('img/industries/img45.jpg');"></div>
-                            </div>
-                            <div class="cc-shape-text">
-                                <h2>Healthcare Facilities</h2>
-                                <p>Supporting hospitals, clinics, and medical centres with specialized waste management, intensive cleaning, and sanitation to meet health and safety standards.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="home-industries__item">
-                        <div class="cc-shape-item">
-                            <div class="cc-shape-visual">
-                                <div class="cc-partial-ring"></div>
-                                <div class="cc-partial-photo" style="background-image:url('img/industries/img46.jpg');"></div>
-                            </div>
-                            <div class="cc-shape-text">
-                                <h2>Retail and Commercial Spaces</h2>
-                                <p>Enhancing the appeal of malls, retail outlets, and offices with deep cleaning, waste collection, and window care solutions.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="home-industries__item">
-                        <div class="cc-shape-item">
-                            <div class="cc-shape-visual">
-                                <div class="cc-partial-ring"></div>
-                                <div class="cc-partial-photo" style="background-image:url('img/industries/img44.jpg');"></div>
-                            </div>
-                            <div class="cc-shape-text">
-                                <h2>Education institutions</h2>
-                                <p>Creating safe and hygienic learning environments in schools, universities, and training centres through regular cleaning and hygiene services.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="home-industries__item">
-                        <div class="cc-shape-item">
-                            <div class="cc-shape-visual">
-                                <div class="cc-partial-ring"></div>
-                                <div class="cc-partial-photo" style="background-image:url('img/industries/img50.jpg');"></div>
-                            </div>
-                            <div class="cc-shape-text">
-                                <h2>Government and Municipal Facilities</h2>
-                                <p>Supporting public facilities with tailored cleaning, hygiene, and waste management services for community use, delivered with care, precision, and lasting impact.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="home-industries__item">
-                        <div class="cc-shape-item">
-                            <div class="cc-shape-visual">
-                                <div class="cc-partial-ring"></div>
-                                <div class="cc-partial-photo" style="background-image:url('img/industries/img49.jpg');"></div>
-                            </div>
-                            <div class="cc-shape-text">
-                                <h2>Real Estate and Construction</h2>
-                                <p>Preparing construction sites and newly completed buildings for occupancy with post-construction cleaning and waste removal.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <a class="fw-bold text-teal text-decoration-none section-link-inline" href="industries">Explore all industries <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <section id="clients" class="overflow-hidden">
-        <div class="container-fluid p-0">
-            <div class="page-split page-split--clients page-split--full">
-                <div class="page-split__media">
-                    <div class="row position-relative">
-                        <div class="col-md-2 p-0">
-                            <div class="cc-top-left-shape">
-                                <p class="text-white fw-bold">Clients</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p>__</p>
-                    <div class="client-logo-grid">
-                        <img class="client-logo-tile" src="./img/clients/img55.jpg" alt="Fourways Mall Logo">
-                        <img class="client-logo-tile" src="./img/clients/img56.jpg" alt="Future Space Logo">
-                        <img class="client-logo-tile" src="./img/clients/img57.jpg" alt="Safety Critical Solutions Logo">
-                        <img class="client-logo-tile" src="./img/clients/img58.jpg" alt="Tibs Logo">
-                        <img class="client-logo-tile" src="./img/clients/img59.jpg" alt="RSG Engineering Logo">
-                        <img class="client-logo-tile" src="./img/clients/img60.jpg" alt="Dirt Diggers Logo">
-                        <img class="client-logo-tile" src="./img/clients/smu.jpg" alt="SMU Logo">
-                        <img class="client-logo-tile" src="./img/clients/verb.jpg" alt="Verb Logo">
-                    </div>
-                </div>
-                <div class="home-industries p-4 p-md-5">
-                        <a class="fw-bold text-teal text-decoration-none section-link-inline" href="clients">View our clients <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <section id="contact" class="contact-section">
         <div class="container">
@@ -587,9 +709,7 @@
 
                 <div class="col-md-5 ps-md-5">
                     <h6 class="contact-header">Contact</h6>
-                    <p class="contact-detail">We look forward to partnering with you to deliver exceptional facilities management 
-                        solutions. Get in touch with us today!
-                    </p>
+                    <p class="contact-detail">We look forward to partnering with you to deliver exceptional facilities management solutions. Get in touch with us today!</p>
                     <p class="contact-detail"><span class="text-teal">Address:</span></p>
                     <p class="contact-detail">2 Bruton Road</p>
                     <p class="contact-detail">Bryanston, Gauteng</p>
@@ -600,9 +720,10 @@
                     <p class="contact-detail"><span class="text-teal">Phone:</span> (+27) 011 300 0800</p>
 
                     <p class="contact-detail"><span class="text-teal">Online</span></p>
-                        <p class="contact-detail"><span class="text-teal">Email:</span> 
-                    <a href="mailto:tebogo@centricare.co.za" class="text-white text-decoration-none">tebogo@centricare.co.za</a>
-                    <p class="contact-detail"><span class="text-teal">Website:</span> 
+                    <p class="contact-detail"><span class="text-teal">Email:</span>
+                        <a href="mailto:tebogo@centricare.co.za" class="text-white text-decoration-none">tebogo@centricare.co.za</a>
+                    </p>
+                    <p class="contact-detail"><span class="text-teal">Website:</span>
                         <a href="https://www.centricare.co.za" class="text-white text-decoration-none" target="_blank">www.centricare.co.za</a>
                     </p>
 
@@ -629,6 +750,83 @@
                     navMenu.classList.remove('is-open');
                     navToggle.setAttribute('aria-expanded', 'false');
                 });
+            });
+        }
+
+        (function() {
+            var els = document.querySelectorAll('[data-animate]');
+            if (!els.length) return;
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                els.forEach(function(el) { io.observe(el); });
+            } else {
+                els.forEach(function(el) { el.classList.add('is-visible'); });
+            }
+        })();
+
+        (function() {
+            var counters = document.querySelectorAll('.count-up[data-target]');
+            if (!counters.length) return;
+
+            function animateCounter(el) {
+                var target = Number(el.getAttribute('data-target')) || 0;
+                var prefix = el.getAttribute('data-prefix') || '';
+                var suffix = el.getAttribute('data-suffix') || '';
+                var duration = 1500;
+                var start = 0;
+                var startTime = null;
+
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    var progress = Math.min((timestamp - startTime) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3);
+                    var value = Math.floor(start + (target - start) * eased);
+                    el.textContent = prefix + value.toLocaleString() + suffix;
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        el.textContent = prefix + target.toLocaleString() + suffix;
+                    }
+                }
+
+                requestAnimationFrame(step);
+            }
+
+            if ('IntersectionObserver' in window) {
+                var seen = new WeakSet();
+                var counterObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting && !seen.has(entry.target)) {
+                            seen.add(entry.target);
+                            animateCounter(entry.target);
+                            counterObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.35 });
+
+                counters.forEach(function(counter) {
+                    counterObserver.observe(counter);
+                });
+            } else {
+                counters.forEach(function(counter) {
+                    animateCounter(counter);
+                });
+            }
+        })();
+
+        var btt = document.querySelector('.back-to-top');
+        if (btt) {
+            btt.style.opacity = '0';
+            btt.style.transition = 'opacity 0.3s';
+            window.addEventListener('scroll', function() {
+                btt.style.opacity = window.scrollY > 400 ? '1' : '0';
             });
         }
     </script>

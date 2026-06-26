@@ -7,7 +7,8 @@
     <meta name="description" content="Contact CentriCare for facilities management and hygiene services.">
     <meta name="robots" content="index, follow">
     <link href="img/favicon.png" rel="icon">
-    <link href="css/pages.css?v=4" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="css/pages.css?v=5" rel="stylesheet">
 </head>
 <body class="cc-storefront">
     <nav class="cc-nav">
@@ -27,23 +28,30 @@
         </div>
     </nav>
 
-    <main class="page">
-        <section class="page-split page-split--contact">
-            <div class="page-split__media">
-                <img class="contact-logo" src="./img/CentriCare-logo-inverse.png" alt="CentriCare Logo White">
-            </div>
-            <div class="page-split__content">
-                <span class="eyebrow"><span class="dot"></span> Contact</span>
-                <h1>Start the conversation.</h1>
-                <p class="lede">Tell us what you need and we will keep the process simple from the first call onward.</p>
-                <p class="lede">We are available for facilities management, hygiene, supplies, and uniform enquiries.</p>
-                <ul class="page-split__list">
-                    <li>2 Bruton Road, Bryanston, Gauteng, South Africa, 2191</li>
-                    <li>Tel: +27 (0) 71 472 7120</li>
-                    <li>Phone: +27 (0) 11 300 0800</li>
-                    <li>Email: <a href="mailto:tebogo@centricare.co.za" class="text-teal text-decoration-none">tebogo@centricare.co.za</a></li>
-                    <li>Website: <a href="https://www.centricare.co.za" class="text-teal text-decoration-none" target="_blank">www.centricare.co.za</a></li>
-                </ul>
+    <main class="page body-showcase">
+        <section class="body-panel">
+            <header class="body-head">
+                <span class="body-kicker" data-animate="fade-up">Contact</span>
+                <h2 data-animate="fade-up" style="animation-delay:0.06s;">Start the conversation.</h2>
+                <p data-animate="fade-up" style="animation-delay:0.12s;">Tell us what you need and we will keep the process simple from first contact to practical delivery.</p>
+            </header>
+
+            <div class="body-grid body-grid--2">
+                <article class="body-card" data-animate="fade-right">
+                    <img src="img/services/img24.jpg" alt="CentriCare services">
+                    <h3>How we support you</h3>
+                    <p>We are available for facilities management, hygiene, supplies, and uniform enquiries across public and private sectors.</p>
+                </article>
+                <article class="body-card" data-animate="fade-left" style="animation-delay:0.08s;">
+                    <h3>Contact details</h3>
+                    <ul class="body-list">
+                        <li>2 Bruton Road, Bryanston, Gauteng, South Africa, 2191</li>
+                        <li>Tel: +27 (0) 71 472 7120</li>
+                        <li>Phone: +27 (0) 11 300 0800</li>
+                        <li>Email: <a href="mailto:tebogo@centricare.co.za" class="text-teal text-decoration-none">tebogo@centricare.co.za</a></li>
+                        <li>Website: <a href="https://www.centricare.co.za" class="text-teal text-decoration-none" target="_blank">www.centricare.co.za</a></li>
+                    </ul>
+                </article>
             </div>
         </section>
     </main>
@@ -88,6 +96,8 @@
         </div>
     </section>
 
+    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+
     <script>
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
@@ -103,6 +113,33 @@
                     navMenu.classList.remove('is-open');
                     navToggle.setAttribute('aria-expanded', 'false');
                 });
+            });
+        }
+
+        (function() {
+            const animatedEls = document.querySelectorAll('[data-animate]');
+            if (!animatedEls.length) return;
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                animatedEls.forEach((el) => io.observe(el));
+            } else {
+                animatedEls.forEach((el) => el.classList.add('is-visible'));
+            }
+        })();
+
+        const btt = document.querySelector('.back-to-top');
+        if (btt) {
+            btt.style.opacity = '0';
+            btt.style.transition = 'opacity 0.3s';
+            window.addEventListener('scroll', () => {
+                btt.style.opacity = window.scrollY > 400 ? '1' : '0';
             });
         }
     </script>
