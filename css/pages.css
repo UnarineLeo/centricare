@@ -2653,6 +2653,14 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   max-width: 520px;
 }
 
+.pages-header__sub1 {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.65);
+  /* margin: 14px 0 0;
+  line-height: 1.65;
+  max-width: 520px; */
+}
+
 /* =====================================================
    SERVICE OVERVIEW GRID  (services.html top section)
    ===================================================== */
