@@ -117,10 +117,10 @@
             position: relative;
             border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            box-shadow: var(--home-shadow);
+            border: none;
+            /* box-shadow: var(--home-shadow); */
             min-height: 420px;
-            background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            /* background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)); */
         }
 
         .home-hero__visual img {
@@ -322,7 +322,11 @@
         }
 
         .home-section--services::before {
-            background-image: url('img/services/clean_4.jpg');
+            /* background-image: url('img/services/clean_4.jpg'); */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('../img/favicon.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
 
         .home-section--about::before {
@@ -551,9 +555,8 @@
                 </div>
             </div>
 
-            <div class="home-hero__visual" data-animate="fade-left" style="animation-delay:0.16s;" aria-label="Facilities service preview">
-                <img src="img/services/clean_2.jpg" alt="CentriCare team delivering facilities and hygiene services">
-                <div class="hero-visual__badge"><strong>Integrated delivery:</strong> Hygiene, facilities, operations, and supply</div>
+            <div class="home-hero__visual" data-animate="fade-left" style="animation-delay:0.16s;background-image:url('img/favicon.png');background-size:contain;background-position:center;background-repeat:no-repeat;" aria-label="Facilities service preview">
+                <!-- <div class="hero-visual__badge"><strong>Integrated delivery:</strong> Hygiene, facilities, operations, and supply</div> -->
             </div>
         </div>
     </section>
