@@ -460,15 +460,33 @@
         .industry-card h3 { margin: 0 0 6px; font-size: 0.95rem; color: #fff; }
         .industry-card p { margin: 0; color: rgba(255, 255, 255, 0.82); font-size: 0.86rem; line-height: 1.55; }
 
-        .clients-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 16px;
+        .clients-carousel {
+            display: flex;
+            gap: 0;
+            overflow: hidden;
+            width: 100%;
         }
 
-        .client-tile { background: #fff; border: 1px solid rgba(13, 35, 52, 0.12); border-radius: 14px; padding: 14px; display: flex; align-items: center; justify-content: center; min-height: 104px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .clients-track {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            flex-shrink: 0;
+            animation: ccClientsLoop 26s linear infinite;
+        }
+
+        .clients-track--clone {
+            animation-delay: -13s;
+        }
+
+        .client-tile { background: #fff; border: 1px solid rgba(13, 35, 52, 0.12); border-radius: 14px; padding: 14px; display: flex; align-items: center; justify-content: center; min-height: 104px; flex: 0 0 220px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .client-tile:hover { transform: translateY(-4px); box-shadow: var(--home-shadow-soft); }
         .client-tile img { max-width: 100%; max-height: 68px; object-fit: contain; }
+
+        @keyframes ccClientsLoop {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
 
         @keyframes ccRotateIn {
             from { opacity: 0; transform: rotate(-10deg) scale(0.88); }
@@ -488,7 +506,7 @@
             .home-hero__album { min-height: 390px; max-width: 640px; margin: 0 auto; }
             .service-album { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .industry-grid, .story-grid, .home-stats__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .clients-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .client-tile { flex-basis: 200px; }
             .home-hero__visual,
             .home-hero__visual img {
                 min-height: 360px;
@@ -506,7 +524,8 @@
             }
             .home-stats { margin-top: -22px; }
             .home-section { padding: 70px 0; }
-            .service-album, .industry-grid, .story-grid, .clients-grid, .home-stats__inner { grid-template-columns: 1fr; }
+            .service-album, .industry-grid, .story-grid, .home-stats__inner { grid-template-columns: 1fr; }
+            .client-tile { flex-basis: 168px; min-height: 90px; }
             .service-album-card, .tilt-left, .tilt-right, .tilt-soft-left, .tilt-soft-right { transform: rotate(0deg); }
         }
 
@@ -516,6 +535,16 @@
                 transition: none !important;
                 transform: none !important;
                 opacity: 1 !important;
+            }
+
+            .clients-track,
+            .clients-track--clone {
+                animation: none !important;
+                transform: none !important;
+            }
+
+            .clients-carousel {
+                overflow-x: auto;
             }
         }
     </style>
@@ -680,15 +709,27 @@
                 <h2 data-animate="fade-up" style="animation-delay:0.05s;">Trusted by organizations that need reliability every day.</h2>
             </header>
 
-            <div class="clients-grid">
-                <div class="client-tile" data-animate="slide-up"><img src="./img/clients/img55.jpg" alt="Fourways Mall logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.05s;"><img src="./img/clients/img56.jpg" alt="Future Space logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.1s;"><img src="./img/clients/img57.jpg" alt="Safety Critical Solutions logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.15s;"><img src="./img/clients/img58.jpg" alt="Tibs logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.2s;"><img src="./img/clients/img59.jpg" alt="RSG Engineering logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.25s;"><img src="./img/clients/img60.jpg" alt="Dirt Diggers logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.3s;"><img src="./img/clients/smu.jpg" alt="SMU logo"></div>
-                <div class="client-tile" data-animate="slide-up" style="animation-delay:0.35s;"><img src="./img/clients/verb.jpg" alt="Verb logo"></div>
+            <div class="clients-carousel" data-animate="slide-up">
+                <div class="clients-track">
+                    <div class="client-tile"><img src="./img/clients/img55.jpg" alt="Fourways Mall logo"></div>
+                    <div class="client-tile"><img src="./img/clients/img56.jpg" alt="Future Space logo"></div>
+                    <div class="client-tile"><img src="./img/clients/img57.jpg" alt="Safety Critical Solutions logo"></div>
+                    <div class="client-tile"><img src="./img/clients/img58.jpg" alt="Tibs logo"></div>
+                    <div class="client-tile"><img src="./img/clients/img59.jpg" alt="RSG Engineering logo"></div>
+                    <div class="client-tile"><img src="./img/clients/img60.jpg" alt="Dirt Diggers logo"></div>
+                    <div class="client-tile"><img src="./img/clients/smu.jpg" alt="SMU logo"></div>
+                    <div class="client-tile"><img src="./img/clients/verb.jpg" alt="Verb logo"></div>
+                </div>
+                <!-- <div class="clients-track clients-track--clone" aria-hidden="true">
+                    <div class="client-tile"><img src="./img/clients/img55.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/img56.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/img57.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/img58.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/img59.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/img60.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/smu.jpg" alt=""></div>
+                    <div class="client-tile"><img src="./img/clients/verb.jpg" alt=""></div>
+                </div> -->
             </div>
 
             <p style="margin-top:18px;"><a class="fw-bold text-teal text-decoration-none" href="clients">View our clients <i class="fas fa-arrow-right"></i></a></p>
