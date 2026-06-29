@@ -7,7 +7,7 @@
     <meta name="description" content="CentriCare client relationships and sectors served.">
     <meta name="robots" content="index, follow">
     <link href="img/favicon.png" rel="icon">
-    <link href="css/pages.css?v=7" rel="stylesheet">
+    <link href="css/pages.css?v=9" rel="stylesheet">
 </head>
 <body class="cc-storefront">
     <nav class="cc-nav">
@@ -27,20 +27,14 @@
         </div>
     </nav>
 
-    <!-- <header class="pages-header pages-header--enhanced">
+    <header class="pages-header pages-header--enhanced">
         <div style="position:relative; z-index:1;">
             <span class="pages-header__eyebrow text-teal" data-animate="fade-up">Who we serve</span>
             <h1 class="text-white" data-animate="fade-up" style="animation-delay:0.08s;">Clients</h1>
             <p data-animate="fade-up" style="animation-delay:0.16s; color: #fff;">Malls, universities, engineering firms, and logistics leaders all trust us to deliver. These relationships are built on consistency, not one-off contracts. It's why our clients stay with us year after year.</p>
         </div>
-    </header> -->
-    <header class="pages-header pages-header--enhanced">
-    <div style="position:relative; z-index:1;">
-        <span class="pages-header__eyebrow text-teal" data-animate="fade-up">Let's talk</span>
-        <h1 class="text-white" data-animate="fade-up" style="animation-delay:0.08s;">Contact Us</h1>
-        <p data-animate="fade-up" style="animation-delay:0.16s; color: #ffff;">Whether it's a single site or a national contract, we keep the process simple from the first call onward. Our team responds quickly and scopes the work around what you actually need. No long sales cycles, just a straightforward path to getting started.</p>
-    </div>
-</header>
+    </header>
+    
     <main class="page">
         <section class="page-split page-split--full page-split--clients">
             <div class="page-split__media">
@@ -148,6 +142,24 @@
                 });
             });
         }
+
+        (function() {
+            var els = document.querySelectorAll('[data-animate]');
+            if (!els.length) return;
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                els.forEach(function(el) { io.observe(el); });
+            } else {
+                els.forEach(function(el) { el.classList.add('is-visible'); });
+            }
+        })();
     </script>
 </body>
 </html>

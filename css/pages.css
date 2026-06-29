@@ -1406,7 +1406,7 @@ section.overflow-hidden.pt-5 { padding-top: 0 !important; }
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('../img/favicon.png');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('../img/favicon.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
