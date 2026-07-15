@@ -1454,6 +1454,7 @@ section.overflow-hidden.pt-5 { padding-top: 0 !important; }
 }
 
 .page-split--clients .clients-carousel {
+    --cc-clients-gap: 14px;
     display: flex;
     gap: 0;
     width: 100%;
@@ -1462,14 +1463,15 @@ section.overflow-hidden.pt-5 { padding-top: 0 !important; }
 
 .page-split--clients .clients-track {
     display: flex;
-    gap: 14px;
+    gap: var(--cc-clients-gap);
     width: max-content;
     flex-shrink: 0;
     animation: ccClientsPageLoop 24s linear infinite;
 }
 
-.page-split--clients .clients-track--clone {
-    animation-delay: -12s;
+.page-split--clients .clients-track__group {
+    display: flex;
+    gap: var(--cc-clients-gap);
 }
 
 .page-split--clients .client-logo-tile {
@@ -1485,7 +1487,7 @@ section.overflow-hidden.pt-5 { padding-top: 0 !important; }
 
 @keyframes ccClientsPageLoop {
     from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
+    to { transform: translateX(calc(-50% - (var(--cc-clients-gap) / 2))); }
 }
 
 .page-split--full {
@@ -2385,8 +2387,7 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .page-split--clients .clients-track,
-    .page-split--clients .clients-track--clone {
+    .page-split--clients .clients-track {
         animation: none !important;
         transform: none !important;
     }
@@ -3183,4 +3184,3 @@ input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   transition: gap 0.2s;
 }
 .svc-back-link:hover { gap: 10px; color: var(--svc-color, var(--cc-teal)); }
-
